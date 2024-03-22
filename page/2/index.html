@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     Hexo
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">Hexo</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+        <img
+          src="/images/ayer.svg"
+          class="cover-logo"
+          alt="Hexo"
+        />
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['keep learning!!!!', '', ''],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-games101-19-Cameras"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/19/games101-19-Cameras/"
+    >games101-19-Cameras</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/19/games101-19-Cameras/" class="article-date">
+  <time datetime="2023-05-19T10:33:50.000Z" itemprop="datePublished">2023-05-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="成像"><a href="#成像" class="headerlink" title="成像"></a>成像</h4><p>1.存在的物体：捕捉</p>
+<p>2.不存在的合成的物体：光栅化和光追</p>
+<p>​		传感器用于捕捉并记录光。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121852319.png" alt="image-20230512185246238" style="zoom:67%;" />
+
+<p>​		感光元件不能直接与光源接触，感光元件不区分来自各个方向的光，所以感光元件上任意一个点都会混合来自各个方向的光。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121854905.png" alt="image-20230512185420851" style="zoom:67%;" />
+
+<p>​		针孔相机拍出来的结果不会出现虚化。</p>
+<h4 id="FOV视场"><a href="#FOV视场" class="headerlink" title="FOV视场"></a>FOV视场</h4><p>​		视场分为水平和竖直，此处以竖直为例，并且此处不考虑棱镜只考虑针孔摄像机。视场大小受传感器的大小和传感器与小孔的距离也就是焦距影响。市场对于焦距的定义，都是以传感器35mm为标准。在此标准下，每一个焦距都对应一个视场：17mm-104°；50mm-47°；200mm-12°。以手机为例，如果手机写的焦距为28mm（然而手机厚度并没有28mm，实际焦距会更小），手机通过减小传感器大小，来等效35mm传感器28mm焦距的视场。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121859414.png" alt="image-20230512185925369" style="zoom:67%;" />
+
+<p>​		传感器大小不变的情况下焦距越长，可视范围越小，对于相同大小的图片相当于把远处的物体拉大。（焦距不变的情况下，传感器越小，视场越小）实际上传感器用于记录光的信息，胶片用于将信息保存为指定格式，此处不做严格区分。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121908026.png" alt="image-20230512190820795" style="zoom: 50%;" />
+
+<h4 id="Exposure曝光"><a href="#Exposure曝光" class="headerlink" title="Exposure曝光"></a>Exposure曝光</h4><p>​		曝光度&#x3D;进来多少光（光圈-F数）*光进来多长时间（快门-Shutter speed（越快，开放时间越短））</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121936650.png" alt="image-20230512193636600"></p>
+<h5 id="ISO感光度"><a href="#ISO感光度" class="headerlink" title="ISO感光度"></a>ISO感光度</h5><p>​		ISO也会影响曝光度，可以理解为是后期处理 ，将接收到的光*某个数 。如对于一张暗图乘以某个数，然后使图更亮。任何信号都会存在噪声，对整个信息乘以一个很大的数，在放大信号的同时也放大了噪声。（将光理解为光子，简单理解是快门不够，进入传感器的光子少，光子少会产生噪声）ISO是线性的，ISO200一定是ISO100的两倍。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122008746.png" alt="image-20230512200802700" style="zoom: 80%;" />
+
+<h5 id="快门"><a href="#快门" class="headerlink" title="快门"></a>快门</h5><p>​		快门会发生运动模糊的现象(关心从关闭到打开的过程)。加入快门的开放时间是t，在t&#x2F;3时运动运动位置为A，在t&#x2F;2时物体运动位置为B，物体运动的中间过程都会被传感器记录，传感器将记录结果平均，形成模糊。如果快门时间更长，物体在这段时间内的运动过程更长，结果就越模糊。如果快门时间不变，物体运动越快，越容易模糊。较小快门时间可以减轻模糊，但也会减小曝光度（调ISO或者光圈）。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122021932.png" alt="image-20230512202130885" style="zoom:67%;" />
+
+<p>​		运动模糊存在一定的反走样效果。因为快门打开需要时间，所以会导致不同的地方记录不同时间的图像，出现了螺旋桨扭曲。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122037367.png" alt="image-20230512203703294" style="zoom:67%;" />
+
+<p>​		减少曝光时间，就会减小曝光度，需要调大光圈，即减小F数。如下图每一列的F数和快门时间可以基本达到相同的曝光度。但是拍照结果不太一样，大光圈即小F数会有景深现象，长快门时间会有运动模糊，所以运动模糊和景深不能同时发生。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/image-20230512204405151.png" style="zoom:67%;" />
+
+<p>​		高速摄影（更大光圈或者更大ISO）：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122048605.png" alt="image-20230512204857544" style="zoom:67%;" />
+
+<p>​		延时摄影（小光圈，用更长的曝光时间记录物体的运动过程(运动模糊)）：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122052243.png" alt="image-20230512205245169" style="zoom: 50%;" />
+
+<h5 id="透镜"><a href="#透镜" class="headerlink" title="透镜"></a>透镜</h5><p>​		实际的透镜很复杂，此处研究理想化薄透镜（不考虑透镜的厚度）。对于平行射入透镜的光，射出透镜会聚焦到一个点，该点为焦点，焦点到透镜中心的距离为焦距。反之如果摄入透镜的光线经过焦点，射出时会变成平行于透镜的光。任意一个过透镜中心的光线，射出透镜时不会改变方向。（假设可以任意改变焦距（现代技术通过多个透镜的组合模拟一个可以任意改变焦距的薄透镜））</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122059997.png" alt="image-20230512205925953" style="zoom:67%;" />
+
+<p>​		z0物距，zi像距，f焦距。通过相似三角形推三者关系。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122103393.png" alt="image-20230512210354341" style="zoom: 50%;" />
+
+<h5 id="模糊现象及F数"><a href="#模糊现象及F数" class="headerlink" title="模糊现象及F数"></a>模糊现象及F数</h5><p>​		假设物体在focal plane，最后会在sensor plane有一个清晰的成像。如果物体在focal plane后面的object，清晰的成像位置一定在sensor plane之前的image处。如果还是想在sensor plane上成像，光穿过iamge会继续传播，最后一个点会在sensor plane上呈现出一个区域而不是一个点（coc）。coc大小计算如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122126154.png" alt="image-20230512212620103" style="zoom:67%;" />
+
+<p>​		F数的写法：FN或者F&#x2F;N，N即F数，F数的值为焦距&#x2F;光圈的直径。在zs和zi不变的情况下，coc的大小受光圈大小的影响。F数越小，光圈越大，模糊越明显。光圈越小越接近小孔成像，形成的图像清晰范围越大，景深就越大。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122128900.png" alt="image-20230512212816841" style="zoom:50%;" />
+
+<h5 id="利用薄棱镜渲染"><a href="#利用薄棱镜渲染" class="headerlink" title="利用薄棱镜渲染"></a>利用薄棱镜渲染</h5><p>​		定义成像平面的大小，定义薄棱镜的大小和焦距，定义物距z0，可以计算出像距zi。在成像平面上选一点x’，连接透镜上一点x’’，根据光经过透镜中心方向不变的性质可以找到x’x’’光线穿过透镜后会到物体的点x’’’。那么此时就找到了一条到成像平面某一点的光线，从而计算成像平面上某一点的值。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122346440.png" alt="image-20230512234608362" style="zoom:67%;" />
+
+<h5 id="景深"><a href="#景深" class="headerlink" title="景深"></a>景深</h5><p>​	光圈会影响模糊的范围。在清晰的成像平面附近一小段距离的coc非常小，可以认为这个范围内的成像都是清晰的。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122355823.png" alt="image-20230512235555713" style="zoom: 67%;" />
+
+<p>​		如下右边蓝色区域为可以认为是清晰的成像区域，左边蓝色的区域为景深。物距、 焦距和光圈都会影响景深的范围。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305122357532.png" alt="image-20230512235747426" style="zoom:67%;" /> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-16-Ray-Tracing4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/18/games101-16-Ray-Tracing4/"
+    >games101-15-Ray-Tracing4</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/18/games101-16-Ray-Tracing4/" class="article-date">
+  <time datetime="2023-05-18T15:45:53.000Z" itemprop="datePublished">2023-05-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>path tracing每个着色点考虑各个方向的光照，大量采样求积分结果，遇到漫反射物体也不会停止传播。（witted style只考虑了光线的多次弹射，不过和path tracing一样都考虑了能量守恒）。同时path tracing使用更接近物理的BRDF（考虑微表面等），可以表现更多材质（但不能处理折射），如磨砂材质（witted style漫反射材质，完美镜面反射及完全透明物体折射）。</p>
+<p>同时，path tracing 具有软阴影。所谓阴影，就是没有直接光照只有环境光。对于witted style来说，着色点的颜色取决于最后到达的漫反射和直接光照的作用，所以是硬阴影。但是path tracing如果没有直接光照的作用，会有来自四面八方间接光照的作用，形成不同程度的阴影。</p>
+<h4 id="蒙特卡洛积分"><a href="#蒙特卡洛积分" class="headerlink" title="蒙特卡洛积分"></a>蒙特卡洛积分</h4><p>求解渲染方程第一步：处理积分</p>
+<p>解决定积分，最后得出来的是面积&#x2F;体积值。当函数非常复杂，无法写出函数解析式时，考虑用蒙特卡洛积分。</p>
+<p>黎曼积分，分解成多个长方形，取中心的xy计算长方形的面积并累加。</p>
+<p>蒙特卡洛积分：在积分域随便取一个数xi，取其对应的yi值计算长方形面积（高度yi，宽度积分域a-b）。采样多次，并将结果平均。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307190905032.png" alt="image-20230719090531833"></p>
+<p>特殊情况：均匀采样，计算过程符合上述概念</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307190912620.png" alt="image-20230719091210507" style="zoom:80%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307190912852.png" alt="image-20230719091232712" style="zoom:80%;" />
+
+<p>​	推广到任何pdf的蒙特卡洛积分形式如下，积分域已经包含在了p(x)中。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307190913740.png" alt="image-20230719091318655" style="zoom:67%;" />
+
+<h4 id="路径追踪Path-tracing"><a href="#路径追踪Path-tracing" class="headerlink" title="路径追踪Path tracing"></a>路径追踪Path tracing</h4><p>Whitted光线追踪：</p>
+<p>1、光滑物体镜面反射</p>
+<p>对于specular的材质正确，但是对于glossy材质，光的反射方向也会分布在镜面反射方向周围。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191336344.png" alt="image-20230719133611179" style="zoom:67%;" />
+
+<p>2、透明物体一部分镜面反射一部分折射</p>
+<p>3、漫反射物体光线停止</p>
+<p>那么漫反射和漫反射物体之间的光线就没有考虑。光线到达漫反射物体应该向四面八方反射。如下图天花板应该是亮的，里面的长方体左侧应该是红色。本质还是考虑的漫反射物体和直接光照。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191341978.png" alt="image-20230719134126782" style="zoom:80%;" />
+
+<h4 id="解渲染方程"><a href="#解渲染方程" class="headerlink" title="解渲染方程"></a>解渲染方程</h4><p>​		先不考虑发光向（反射方程比渲染方程少了发光项）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191352788.png" alt="image-20230719135247700"></p>
+<p>​		对于一个场景直接光照（还是认为光照从着色点向外），从其他物体反射来的L为0。使用蒙特卡洛采样求积分。f(x)为反射方程待积分的函数，pdf为1&#x2F;2Π（因为是在半球上采样，此处是均匀采样）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191409460.png" alt="image-20230719140930347" style="zoom:80%;" />
+
+<p>​		要计算点p到w0方向反射的光：首先按照某种pdf采样n个方向，对于每一个方向，从点p按照方向连接一根光线。如果该光线能够连接到光源，则按照渲染方程计算其值，并且将n个结果累加。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191415073.png" alt="image-20230719141512966" style="zoom:80%;" />
+
+<p>​		下面引入间接光照的计算：当某个方向的光线打中物体时，对于要计算的点来说，物体也是光源，要计算打中物体的光，可以对该物体递归处理。光线方向作为观察方向。Q的光照结果即P的入射光。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191421138.png" alt="image-20230719142129054" style="zoom: 80%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191423483.png" alt="image-20230719142334364" style="zoom:80%;" />
+
+<p>​		上述算法问题1：递归没有停止条件。真实情况光线应该弹射无数次。但如果限制弹射次数会造成能量损失。引入的方式RR：先确定一个0-1的概率。 以一定的概率打出光线，最后结果就是L0&#x2F;P，1-p的概率不打出光线，结果为0。以一定概率打不打光线，这样计算的结果期望为L0。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191443102.png" alt="image-20230719144327043"></p>
+<p>​			先选取概率P，随机生成0-1的数ksi，如果大于概率p，则不打出光线，返回0。否则打出光线进行正常计算&#x2F;递归，只是结果要除以p。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191448209.png" alt="image-20230719144837080" style="zoom: 67%;" />
+
+<p>​		上述算法的问题2：光线数量爆炸。因此为了防止光线爆炸，只随机往一个方向采样一次。N&#x3D;1的蒙特卡洛积分叫路径追踪。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191428380.png" alt="image-20230719142838259" style="zoom:80%;" />
+
+<p>​			N&#x3D;1会造成很大的噪声，则从一个像素发出多条光线，将结果求平均即可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191435291.png" alt="image-20230719143516172"></p>
+<p>​		首先选取相机位置，对于某个像素，采样N个光线。对于像素内部采样的每一个点，先生成一根光线。如果光线打到着色点p,计算着色点的颜色并且将结果累加平均。在shade函数中，视线是从着色点连接相机。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191435898.png" alt="image-20230719143559807" style="zoom: 80%;" />
+
+<p>​		如果在像素内部采样少，计算速度快，会造成很大的噪声，需要解决该问题：</p>
+<p>​		如果向四面八方均匀采样，根据距离光源的远近和光源大小，打到光源的概率不同。如果一直没有打到光源，则光线浪费。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191456439.png" alt="image-20230719145651328" style="zoom:67%;" />
+
+<p>​		解决办法是改变采样方式，蒙特卡洛可以使用任意pdf。比起原来从着色点均匀向半球任意方向采样，此处选择从光源上进行采样。则采样的pdf是1&#x2F;A（光源面积）。从光源连向着色点，该连线会与着色点法线和光源朝向的法线产生两个夹角。然而蒙特卡洛对立体角积分就应该在立体角采样，但此处是在光源采样，所以渲染方程需要写成在光源上的积分。找到dw和dA的关系即可：计算出dA在单位球的投影即为dw：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191515517.png" alt="image-20230719151517402" style="zoom:67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191518804.png" alt="image-20230719151840687" style="zoom:67%;" />
+
+<p>​		最后着点的着色结果来源于光源直接光照和其他物体的间接光照，因此将着色分为两部分：</p>
+<p>1、直接光照：用上述方法对光源进行采样和积分（只采样一次）</p>
+<p>2、间接光照，使用之前的方式，引入俄罗斯轮盘赌</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191526157.png" alt="image-20230719152625933" style="zoom: 50%;" />
+
+<p>细节问题：上述方法默认了光源和物体直接没有遮挡，但如果光源和物体间有遮挡，在进行直接光照的计算时，需要判断光线是否被遮挡。可以将该光线计算判断交点，如果有交点且交点为光源，则计算着色，否则直接光照的结果是0。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307191529055.png" alt="image-20230719152920944" style="zoom:67%;" />
+
+<p>路径追踪暂不考虑点光源（可以做成很小的面光源）</p>
+<p>path tracing 属于ray tracing，还有许多其他的tracing 方法。问题还包括：如何进行均匀采样，随机数是否有要求，采用何种pdf可以得到更好的结果。能否结合光源和半球采样。对于一个像素的多个采样结果是直接平均还是加权平均，以及得到的radiance如何转化成颜色显示在屏幕。</p>
+<h5 id="实现过程梳理："><a href="#实现过程梳理：" class="headerlink" title="实现过程梳理："></a>实现过程梳理：</h5><p>1、每个像素产生n条光线，最后的该像素的着色结果是n个结果的平均（实际实现时，每个像素的光线还是从相机到像素中心，后期会因为采样取不同的方向）</p>
+<p>2、对于单根光线，先判断和场景有无交点，没有交点返回背景色&#x2F;黑色</p>
+<p>3、对于单根光线，如果和场景有交点：</p>
+<p>（1）计算直接光照：从光源上采样一次（N&#x3D;1），获得交点和pdf；在着色点和交点之间生成光线，如果没有遇到遮挡物，计算着色：L×f×cos×cosl&#x2F;d^2&#x2F;pdf（&#x2F;N）；如果遇到遮挡物，则没有直接光照这一项。</p>
+<p>（2）计算间接光照：选取俄罗斯转盘概率p，再随机生成[0-1]的浮点数k。如果k&gt;p,不进行迭代，无间接光照；如果k&lt;p，在半球上采样一个方向，并且在着色点和方向上生成光线。如果该光线相交的是物体而不是光源（光源在直接光照中计算了），计算着色L×f×cos&#x2F;pdf（&#x2F;N）&#x2F;p；L是递归的结果。</p>
+<p>（3）最终着色结果：自发光+直接光照+间接光照。</p>
+<p>关于自发光：如果不添加自发光则无法渲染光源。首先，光源需要正常接收间接光照。但是直接光照不会给自己提供颜色，因为着色点和采样点形成的光线与法线垂直。所以为了渲染光源，需要加上自发光。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-18-Advanced-Rendering"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/18/games101-18-Advanced-Rendering/"
+    >games101-18-Advanced_Rendering</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/18/games101-18-Advanced-Rendering/" class="article-date">
+  <time datetime="2023-05-18T15:38:39.000Z" itemprop="datePublished">2023-05-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="有偏与无偏的计算方法"><a href="#有偏与无偏的计算方法" class="headerlink" title="有偏与无偏的计算方法"></a>有偏与无偏的计算方法</h4><p>​		无偏积分的期望值总是正确的值，无论使用多少样本。反之就是有偏。但是如果取的样本无限多，最后期望会收敛到一定值，但这种情况也是有偏 ，但是一致。</p>
+<h5 id="BDPT（无偏）"><a href="#BDPT（无偏）" class="headerlink" title="BDPT（无偏）"></a>BDPT（无偏）</h5><p>单向光线追踪:从相机产生一条光线，连接最后一个点和光源</p>
+<p>双向光线追踪： 从光源和相机分别产生一些半路径，连接两个半路径的端点形成一条完整的光路。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305190911290.png" alt="image-20230519091135260" style="zoom:67%;" />
+
+<p>​		对于如下场景，几乎整个场景都是通过漫反射照亮。如果从相机开始计算，找到带有很多能量的光路较为复杂。如果第一个点是漫反射点，很难控制光路打到光线集中的地方。这种情况下，从光源开始便于计算。但是该方法实现困难并且计算慢。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305190917374.png" alt="image-20230519091728291" style="zoom:67%;" />
+
+<h5 id="MLT（无偏）"><a href="#MLT（无偏）" class="headerlink" title="MLT（无偏）"></a>MLT（无偏）</h5><p>​		用马尔科夫链作为采样工具。当前有一个样本，基于当前样本在附近生成新样本，用这些样本估计函数值。对于蒙特卡洛，采样的pdf和要积分的函数形状一值时，误差最小。马尔科夫链可以形成符合这种特性的样本。</p>
+<p>​		在光线传播上，在有一个路径的情况下，可以生成周围更多相似的路径。如下图对蓝色光路进行局部扰动获得新路径，最后可以找到所有路径。适合做复杂的光路传播，擅长从局部探索困难的路径。例如光线在水底聚焦被相机看到，经历了相机-折射-漫反射-折射-光源（SDS），但是光经过漫反射后只有在很小一部分区域才能折射出来。使用马尔科夫链就可以在折射出来的光线附近找到新的光线。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305190021893.png" alt="image-20230519002121754" style="zoom: 80%;" />
+
+<p>​		简单的蒙特卡洛方法可以根据样本数分析其收敛速度。但是MLT很难估计收敛速度，不能保证每一个像素收敛速度相同，会产生噪声。因为每一张图收敛结果不确定且不同，因此不能渲染动画。</p>
+<h5 id="光子映射（有偏）"><a href="#光子映射（有偏）" class="headerlink" title="光子映射（有偏）"></a>光子映射（有偏）</h5><p>​		适合光在折射&#x2F;反射后聚焦产生新的图案及SDS下用该方法。</p>
+<p>一种光子映射的方法如下：</p>
+<p>1.从光源出发进行光线追踪，直至光线到达漫反射物体</p>
+<p>2.从相机出发进行光线追踪，直至光线到达漫反射物体</p>
+<p>3.局部的密度估计：对任意一个着色点，通过最邻近算法取离它最近的N个光子，计算这些光子所占的面积，得到光子的密度，也就是用光子数N除以面积。密度大的地方更亮。</p>
+<p>​		当取的光子数N比较少，采样点少，就会产生比较大的噪声。而光子取多图像就会比较模糊，对于临近的点计算出的结果可能相同。计算光子密度的时候，正确的方法应该是对当前一个点的一个微小的面积dA进行计算它的光子数从而计算密度，但是此处是对一定的光子数的实际面积进行的计算，所以两者本质上并不相等。</p>
+<p>​		当光源发出的光子足够多的时候，同样数量的光子覆盖的面积ΔA会更小，也就会更接近dA，最终的结果也会更准确，当打出的光子接近极限，ΔA&#x3D;dA，则结果正确，所以光子映射是一个有偏但是一致的方法。</p>
+<p>​		如果给定一个微小面积计算每个微小面积的光子密度，也就是ΔA是常数，则确定了光子范围。但是给定的常数始终不等于dA，所以得到的结果有偏但是不一致。</p>
+<h5 id="VCM（有偏）"><a href="#VCM（有偏）" class="headerlink" title="VCM（有偏）"></a>VCM（有偏）</h5><p>​		该方法是BDPT和光子映射的组合。对于两条半路径，如果两者的端点无法连接但是很接近，不要浪费两个子路径，使用光子映射来处理临近的光子。</p>
+<h5 id="实时辐射度-Instant-Radiosity-IR-（有偏）"><a href="#实时辐射度-Instant-Radiosity-IR-（有偏）" class="headerlink" title="实时辐射度 Instant Radiosity (IR)（有偏）"></a>实时辐射度 Instant Radiosity (IR)（有偏）</h5><p>​		已经被照亮的面都可以认为是光源，光源可以再照亮其他物体。光源首先发出光线，最后光线停住的点可以视作新的虚拟光源照亮着色点。在有很多细小光源的场景很适合，但是当虚拟光源接近着色点时会出现闪光点。该方法不适合毛玻璃材质。</p>
+<h4 id="外观建模"><a href="#外观建模" class="headerlink" title="外观建模"></a>外观建模</h4><p>​		对于表面模型，其材质就是BRDF，下面讨论非表面模型。</p>
+<h5 id="散射介质（如云、雾）"><a href="#散射介质（如云、雾）" class="headerlink" title="散射介质（如云、雾）"></a>散射介质（如云、雾）</h5><p>​		以光线穿过云为例，云由许多冰晶组成，不考虑自发光。光经过冰晶可能被吸收、被散射到各个方向，冰晶也可能接受别的方向散射来的光。</p>
+<p>​		光如何散射通过Phase Function定义（类似BRDF决定光如何反射）。从相机开始找光路，能走多远由散射介质的吸收能力决定，停下时考虑光的散射方向。最后找到的光路类似光在物体表面弹射，只是在光路了上的任何一点都可能发生方向的改变。此处不是光与表面作用而是和体积作用，因此不能使用渲染方程，但是都需要找光路。</p>
+<p>​		很多物体光都有进去的可能，只是穿透能力不强，光进去一段时间就消失。</p>
+<h5 id="头发"><a href="#头发" class="headerlink" title="头发"></a>头发</h5><p>​		头发是一根根，不能当作是一个表面。如下图，对于头发有无色的高光和有色的高光。计算量大，需要计算光线和每一根头发的作用。</p>
+<p> （1）Kajiya-Kay Model		</p>
+<p>​		将头发当作一个圆柱，光会散射成一个圆锥的形状，剩下一部分类似漫反射。但是渲染效果不真实。</p>
+<p>（2）Marschner Model</p>
+<p>​		将头发当成玻璃圆柱。光与头发的作用有三种情况，R-在表面直接被反射；TT-折射进头发再被折射出去；TRT-折射进头发，在头发内壁发生反射再折射出去。（将头发分为表面和内部，内部也会有色素，会发生光线被吸收）</p>
+<h5 id="动物毛发"><a href="#动物毛发" class="headerlink" title="动物毛发"></a>动物毛发</h5><p>​		动物毛发比人的头发的髓质更大，因此不能用头发模型来计算动物毛发。</p>
+<p>（1）Double Cylinder Model</p>
+<p>R:光再毛发表面直接被反射</p>
+<p>TT：光与髓质没有作用，折射进头发再被折射出去</p>
+<p>TRT：光与髓质没有作用，折射进头发，在头发内壁反射，再被折射出去</p>
+<p>TTs：折射进入, 第一次穿过髓质时, 产生散射, 再次折射出去</p>
+<p>TRTs:折射进入, 第一次穿过髓质后并未折射出去, 而是在头发内壁反射回来, 第二次穿过髓质, 再产生一次折射后出去（散射两次）</p>
+<h5 id="颗粒材质"><a href="#颗粒材质" class="headerlink" title="颗粒材质"></a>颗粒材质</h5><p>​		下面讨论几种表面模型。</p>
+<p>玉石</p>
+<p>​		光线从某个点进入物体表面，在物体内部发生大量散射，再从物体表面另一位置出去。也称作次表面散射。</p>
+<p>​		BRDF：对于任意方向来的光，到达某一个着色点，从任意方向反射出去</p>
+<p>​		BSSRDF:对于任意方向来的光，到达某一个着色点，从任意方向反射出去,但是反射点的位置可以表面任意一个位置。所以除了对立体角积分，还需要对物体表面积分。BSSRDF需要四个参数定义（入射点位置，入射点方向，出射点位置，入出射点方向）</p>
+<p>​		还可以将该模型模拟成两个光源，一个在物体内部，一个在物体外部。</p>
+<h5 id="布料"><a href="#布料" class="headerlink" title="布料"></a>布料</h5><p>纤维fibers-股ply-线yarn-布料</p>
+<p>​		计算表面与光的作用，结果与织法有关。给定编织模式，计算整体行为。但是表面渲染有限制，羊毛绒是往外一根一根, 不是一个平面。</p>
+<p>​		一种方法是不再把布料当成纤维，而是当成体积。对空间划分格子，在每一个格子内部将布料当成类似云的散射介质计算。但是计算量庞大。</p>
+<p>​		另一种方法是，知道每一个纤维的缠绕方式，渲染每一个纤维（如渲染每一根头发）。</p>
+<h5 id="详细外观"><a href="#详细外观" class="headerlink" title="详细外观"></a>详细外观</h5><p>​		看起来不真实，现实世界更复杂，车会有划痕等等, 鼠标会有大小不一的高光。用微表面模型得到的结果不太真实。</p>
+<p>​		在微表面模型中，D（h）采用简单的模型，如符合正态分布，因此效果不真实。真实情况是，D（h）基本符合统计规律，但是又自己的细节。</p>
+<p>​		在这种情况下路径采样困难。每一个微表面是一个镜面, 再假设一个针孔摄像机和点光源。无论从针孔摄像机, 还是点光源连接微表面, 发生镜面反射。都很难反射到点光源或者针孔摄像机.</p>
+<p>​		一个像素覆盖很多的微表面形成一个区域, 把这个区域的法线分布算出来, 然后替代原本的光滑的法线分布, 用在原本的微表面模型里.</p>
+<p>​		一个像素覆盖法线贴图的面积, 导致不同特征的法线分布。 不同的法线贴图, 有不同的法线分布。</p>
+<h5 id="通过波动光学研究材质"><a href="#通过波动光学研究材质" class="headerlink" title="通过波动光学研究材质"></a>通过波动光学研究材质</h5><p>​		波动光学得到的BRDF与几何得到的不太相同，有自己的特点。</p>
+<h4 id="程序化生成"><a href="#程序化生成" class="headerlink" title="程序化生成"></a>程序化生成</h4><p>​		定义三维纹理，但是内存开销较大。可以不进行存储，在需要的时候查询。如3D噪声函数，空间中任意一个坐标, 返回需要查询的值(纹理细节)。通过任意方式处理噪声函数，就可以得到任意的效果。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-15-Ray-Tracing3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/15/games101-15-Ray-Tracing3/"
+    >games101-15-Ray-Tracing3</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/15/games101-15-Ray-Tracing3/" class="article-date">
+  <time datetime="2023-05-15T03:39:40.000Z" itemprop="datePublished">2023-05-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="Irradiance"><a href="#Irradiance" class="headerlink" title="Irradiance"></a>Irradiance</h4><p>​		每单位照射面积所接收到的能量。此处面积必须与光线垂直，如果是不垂直的光线，需要类似Blinn-Phong的漫反射光照，乘以一个cosθ。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141342934.png" alt="image-20230514134205834" style="zoom:67%;" />
+
+<p>​		当光线垂直照射平面时，如上图左边所示，照射到平面上的面积与光线本身垂直。但当光线斜着照射到平面时，此时真正与光线垂直的面积为A2cosθ。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141409681.png" alt="image-20230514140908635" style="zoom:67%;" />
+
+<p>​		对于之前Blinn-Phong的例子，此处认为光每单位时间辐射出来的能量是一个定值，这些能量会均匀分布在球壳上，所以对于单位为1的球壳和单位r的球壳，总能量都是Φ。·但是单位为r的球壳面积更大，计算出的irradiance就更小。（此处itensity没有变，对于同一个方向而言，根据计算公式微分立体角不随球壳的大小改变。能量衰减相当于能量分散）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141354164.png" alt="image-20230514135419108" style="zoom:50%;" />
+
+<h4 id="radiance"><a href="#radiance" class="headerlink" title="radiance"></a>radiance</h4><p>​		每单位垂直面积（所以dA要乘以cosθ）、每单位立体角（每个方向）上单位时间光辐射出的能量（所以做两次导数）&#x2F;	 单位垂直面积，在单位时间内接收到某个方向的能量。也就是在irradiance的基础上增加的方向性。当直接辐射到平面上的程度越低时，光线就越弱，而当光线完全垂直于平面时强度最高。如果把单位立体角和单位面积看作无穷小，则可以计算单根光线到单个着色点的辐射率。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141412287.png" alt="image-20230514141247249" style="zoom:67%;" />
+
+<p>​		该方程也可以转换成如下两个方程：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141541083.png" alt="image-20230514154139046" style="zoom: 50%;" />
+
+<p>​		在单位时间单位面积上会接收不同方向来的能量，或者会向不同方向散发能量，将E对立体角求导，得到具体某一个方向上的能量。在单位时间单位立体角上会接收一块面积光散发的能量，或者会向一块面积散发能量，将I对面积求导，得到具体单位面积散发&#x2F;接收的能量。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141541496.png" alt="image-20230514154149459" style="zoom:50%;" />
+
+<p>​		在单位时间单位面积光会向各个方向辐射出能量，得到具体向某一个方向辐射出的能量。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141541897.png" alt="image-20230514154158860" style="zoom:50%;" />
+
+<p>​		对于一个单位面积，会接收到来自各个方向的能量，这里只考虑正半球，因为负半球来的光照射不到单位面积（Blinn-Phong模型中也会把cos最小值限制在0）。通过对各个方向的radiance积分求和，就可以得到对于一个单位面积的irradiance。如下式子的含义式，一个点(微分面积元，或者说着色点)所接收到的亮度(irradiance)，由所有不同方向的入射光线亮度(radiance，可以从光源获得)共同贡献得到。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141450693.png" alt="image-20230514145032647" style="zoom:67%;" />
+
+<p>​		可以用如下离散的方式求积分函数的总面积&#x2F;总体积。增加离散步长可以提高准确率。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int steps = 100;</span><br><span class="line">float sum = 0.0f;</span><br><span class="line">vec3 P    = ...;</span><br><span class="line">vec3 Wo   = ...;</span><br><span class="line">vec3 N    = ...;</span><br><span class="line">float dW  = 1.0f / steps;</span><br><span class="line">for(int i = 0; i &lt; steps; ++i)</span><br><span class="line">&#123;</span><br><span class="line">    vec3 Wi = getNextIncomingLightDir(i);</span><br><span class="line">    sum += Fr(p, Wi, Wo) * L(p, Wi) * dot(N, Wi) * dW;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="BRDF双向反射分布函数"><a href="#BRDF双向反射分布函数" class="headerlink" title="BRDF双向反射分布函数"></a>BRDF双向反射分布函数</h4><p>​		此处认为所谓反射，是指物体吸收了一部分能量（入射，接收光），再将一部分能量辐射出去（出射，反射光）。单位面积dA接收到 ωi 方向来的Radiance，下图中用 L(ωi) 表示，也能理解成iradicance的一个微元dE(ωi)&#x3D; L(ωi)cosθidwi，然后再辐射到四面八方 ωr 中去，这时候辐射出去的又是Radiance（因为反射出去无数多条，power会被分散，此处关注其中的一个反射方向），用 dLr(x, ωr))表示。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141519355.png" alt="image-20230514151942291" style="zoom: 50%;" />
+
+<p>​		BRDF描述了入射光线经过某个表面反射后在各个可能的出射方向上能量分布。比如已经知道入射方向 ωi ，对于任意 ωr反射方向，能得到值域在[0,1]的浮点数返回值。返回值意义：定义某个点在 ωr 方向的反射光线的能量跟 ωi 方向射入的光线能量的比值。比如镜面反射，则镜面反射的方向能量接近百分之百，其他反射方向接近0比如漫反射，则所有方向的能量比例相同，均分；该函数描述了物体表面与光线如何作用，可以定义不同材质。Blinn-Phong光照模型也可以被认为是BRDF,但是没有考虑能量守恒。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141559470.png" alt="image-20230514155905411" style="zoom: 50%;" />
+
+<h5 id="Cook-Torrance-BRDF"><a href="#Cook-Torrance-BRDF" class="headerlink" title="Cook-Torrance BRDF"></a>Cook-Torrance BRDF</h5><p>Cook-Torrance BRDF兼有漫反射和镜面反射两个部分。kd是被折射的入射光能量比率，ks是被反射的比率。flambert 是漫反射部分（将以前漫反射的计算结果的点乘取出放入反射方程的cos），等于c&#x2F;Π，c是表面颜色,除以Π是对反射光标准化（此处暂不考虑）。flambert 满足大多数实时渲染的目的。</p>
+<p>镜面反射部分（分母部分用于归一化）：</p>
+<p>D:法线分布函数：估算在受到表面粗糙度的影响下，朝向方向与半程向量一致的微平面的数量。</p>
+<p>这是用来估算微平面的主要函数。在给定0-1的粗糙程度下，计算与半程向量取向一致的微表面比例，返回0-1的比例值。在不同粗糙度参数下，当粗糙度很低（也就是说表面很光滑）的时候，与半程向量取向一致的微平面会高度集中在一个很小的半径范围内。由于这种集中性，NDF最终会生成一个非常明亮的斑点。但是当表面比较粗糙的时候，微平面的取向方向会更加的随机。与半程向量取向一致的微平面分布在一个大得多的半径范围内，但是同时较低的集中性也会让最终效果显得更加灰暗。</p>
+<p>F:几何函数：描述了微平面自成阴影的属性。当一个平面相对比较粗糙的时候，平面表面上的微平面有可能挡住其他的微平面从而减少表面所反射的光线。几何函数从统计学上近似的求得了微平面间相互遮蔽的比率，这种相互遮蔽会损耗光线的能量。</p>
+<p>几何函数还是需要将粗糙度作为输入参数，不过这里的粗糙度是D函数粗糙度的重新映射，取决于是直接光照还是IBL光照。也需要考虑光线向量和观察方向。1.0表示没有微表面阴影，0.0表示彻底被遮蔽。</p>
+<p>G:菲涅尔方程：菲涅尔方程描述的是在不同的表面角下表面所反射的光线所占的比率。比例会随着观察角度的不同而不同。</p>
+<p>每个表面或材料在直视其表面时都有一定程度的基础反射率，但从某个角度观察表面时，与表面的基础反射率相比，所有反射都变得更加明显。F0是基础反射率，使用折射率或者IOR计算。</p>
+<p>Fresnel-Schlick近似仅仅对电介质或者说非金属表面有定义，使用一些处理和插值使得金属也可以使用该公式。对于导体或者金属表面而言基础反射率一般是带有色彩，所以F0会用RGB表示。这些金属表面相比于电介质表面所独有的特性引出了所谓的金属工作流的概念。也就是需要额外使用一个被称为金属度(Metalness)的参数来参与编写表面材质。金属度用来描述一个材质表面是金属还是非金属的。如果是金属需要对F0着色（表面纹理，金属无漫反射）。</p>
+<p>PBR渲染管线所需要的每一个表面参数都可以用纹理来定义或者建模。使用纹理可以逐个片段的来控制每个表面上特定的点对于光线是如何响应的。</p>
+<h4 id="反射方程"><a href="#反射方程" class="headerlink" title="反射方程"></a>反射方程</h4><p>​		即单位面积所接受的能量，是由所有不同方向上入射光线的irradiance贡献得到的，图中的L（wi方向来达到点x的光线），而不同方向入射光irradiance对反射方向ωr（点x向wr方向辐射的光线）的贡献程度由BRDF函数决定。将所有irradiance对反射方向的贡献积分，得到一个单位面积（一点）在整个光照环境下,对出射方向（观测方向）的贡献。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141559858.png" alt="image-20230514155930809" style="zoom:50%;" />
+
+<p>​		入射光线的radiance不仅仅是光源所造成，还有可能是其他物体上着色点的反射光线的radiance，恰好反射到当前的着色点p。所以一个物体的反射光会成为另一个物体的入射光，因此是一个递归的过程。</p>
+<h4 id="渲染方程"><a href="#渲染方程" class="headerlink" title="渲染方程"></a>渲染方程</h4><p>​		此处所有方向认为朝外，从点p指向外。认为下半球的贡献为0。此处cos用法线和微分立体角（方向）的点积表示。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141608886.png" alt="image-20230514160826844" style="zoom:67%;" />
+
+<p>​		对于一个点光源，该点只会接收到来自点光源的一根光线：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141612720.png" alt="image-20230514161236661" style="zoom:67%;" />
+
+<p>​		对于多个点光源：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141613487.png" alt="image-20230514161340411" style="zoom: 50%;" />
+
+<p>​		对于面光源，就相当于无穷多个点光源的集合，只需要对面光源所在的立体角范围进行积分：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141616903.png" alt="image-20230514161626837" style="zoom: 67%;" />
+
+<p>​		如果场景中有加入其他物体，可以把其他物体同样考虑成面光源，对其所占的立体角进行积分。只不过对其它物体的立体角积分不像是面光源所有入射方向都有radiance，物体的立体角可能只有个别几个方向有入射的radiance(即多次物体间光线反射之后恰好照射到着色点x)，其它方向没有，但本质上都可以视作是面光源。如下对于物体x’：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141622884.png" alt="image-20230514162240837" style="zoom:67%;" />
+
+<p>​		其中各项与原渲染方程中一一对应，(这里其实是有数学严格推导的，不过只是为了接下来构建直观的物理解释，对于这些推导不必在意，默认成立即可	</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141629833.png" alt="image-20230514162954768" style="zoom: 67%;" />
+
+<p>​		进一步简写：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141632301.png" alt="image-20230514163214255" style="zoom:67%;" />
+
+<p>​		E为物体自己发光，KE则代表对光源反射一次的结果，即直接光照，那么前两项之和就是光栅化当中着色所考虑的结果。对于全局光照来说，还考虑了一次弹射的间接照明、两次弹射的间接照明，依次类推。着色点的值就是物体自发光加上直接光照与多次间接光照的结果，而这一切都是从渲染方程推导而来的，因此这也正是渲染方程的物理意义。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141633270.png" alt="image-20230514163328230" style="zoom:67%;" />
+
+<p>​		如下是一个示例：</p>
+<p>​		（1）一次反射直接光照（光栅化），能被光照亮的部分就是有颜色的，不能被光照亮的部分就是黑色：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141641229.png" alt="image-20230514164109124" style="zoom: 50%;" />
+
+<p>​		（2）两次反射，考虑到一次弹射的间接光照：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141641516.png" alt="image-20230514164122323" style="zoom: 50%;" />
+
+<p>​		（3）3次反射，考虑到两次弹射的间接光照：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141641029.png" alt="image-20230514164142826" style="zoom:50%;" />
+
+<p>​		（4）4次反射,灯亮的原因：光经过两层玻璃折射进去，经过两层玻璃折射出来被照相机看到</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141642498.png" alt="image-20230514164254408" style="zoom:50%;" />
+
+<p>​		考虑次数越多越接近真实图片效果，如果经过无限次数，由于能量守恒，最后趋近收敛。与快门时间越长接收越来越多光照 导致曝光是两回事。</p>
+<h4 id="基础概率论"><a href="#基础概率论" class="headerlink" title="基础概率论"></a>基础概率论</h4><p>​		X：随机变量（可以取某些值的一个数）。</p>
+<p>​		X~p(x)：随机变量的概率分布，描述随机过程选择值 x 的相对概率，必须包含所有能取到的值。</p>
+<p>​		概率分布对于离散型随机变量按照如下方式表示：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141811301.png" alt="image-20230514181104266" style="zoom:50%;" />
+
+<p>​		例如对于骰子：p(1)&#x3D;p(2)&#x3D;p(3)&#x3D;p(4)&#x3D;p(5)&#x3D;p(6)&#x3D;1&#x2F;6。</p>
+<p>​		对于所有可能取值的概率，概率必须大于0，这些概率和相加为1：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141715860.png" alt="image-20230514171530816" style="zoom: 67%;" />
+
+<p>​		期望：从随机分布中重复抽取样本所获得的平均值。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141716502.png" alt="image-20230514171636464" style="zoom:67%;" />
+
+<p>​		X~p(x)在连续情况下，一个随机变量 X，可以取任意一组连续值，其概率分布由连续概率密度函数PDF 给出。通过对该函数积分得到一段区间内的面积，即为X在这段区间内的概率值。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141753930.png" alt="image-20230514175327878" style="zoom:67%;" />
+
+<p>​		 随机变量X的函数Y,也是随机变量，随机变量函数的期望值计算如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305141753995.png" alt="image-20230514175300955" style="zoom:67%;" /> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-14-Ray-Tracing2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/14/games101-14-Ray-Tracing2/"
+    >games101-14-Ray-Tracing2</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/14/games101-14-Ray-Tracing2/" class="article-date">
+  <time datetime="2023-05-14T01:45:04.000Z" itemprop="datePublished">2023-05-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​		如果整个场景只有一个极其复杂的单一人物模型，那么只对这一个物体做包围盒的话，相当于对效率没有任何提升。如果整个场景充斥着大量的细小模型，如草，花之类的，每个模型可能只有很少的面，如果此时对每个物体求包围盒，得到的包围盒数量会相当之多，对于光线追踪效率来说效率提升有限。基于以上两点考虑，AABB并不应只局限于以物体模型为单位，因此如何更好的划分场景形成不同的AABB，使得划分之后的AABB能够更好的加速光线追踪，就是接下来要考虑的问题关键。</p>
+<h4 id="均匀空间划分"><a href="#均匀空间划分" class="headerlink" title="均匀空间划分"></a>均匀空间划分</h4><p>（1）对所要考虑的场景找一个包围盒：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131029114.png" alt="image-20230513102915947" style="zoom:50%;" />
+
+<p>（2）在光线追踪之前，均匀用小格子划分这个大包围盒（相当于把场景均匀划分成更小的AABB包围盒）：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131029151.png" alt="image-20230513102934066" style="zoom:50%;" />
+
+<p>（3）标记出与物体表面相交的格子(不包括物体内部)，存储物体模型信息:</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131029586.png" alt="image-20230513102953483" style="zoom:50%;" />
+
+<p>（4）根据光线的方向与判断出所有与光线相交的格子(这一步可以利用bresenham算法，如对于朝右上方的光线，光线经过的下一个格子为当前格子的右边或者上边的格子，求交点找更近的格子)，倘若格子还与物体表面相交，就说明光线可能会和物体相交，再进一步将光线与格子中的物体模型或是三角形面求交。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131030156.png" alt="image-20230513103007070" style="zoom:50%;" />
+
+<p>问题1：小格子的大小</p>
+<p>​		在该方法中，更多的计算是光线与AABB包围盒（小格子）而不是物体，通过包围盒把计算的三角形面限制在更小的范围内，所以某种程度上可以加速计算。但是格子的大小也会影响计算速度。在极端情况下，假如格子的大小为1✖1,相当于没有进行划分。如果格子太过密集，要计算的小格子很多，也会影响计算速度。较好的划分程度为格子数&#x3D;C✖物体个数，在3维情况下C的值一般取27。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131046138.png" alt="image-20230513104601004" style="zoom: 50%;" />
+
+<p>问题2：均匀划分场景引发的问题</p>
+<p>​		如果说场景较为空旷，物体较小且分离得比较开，那么均匀分割的效果就会很差了，因为会有很多无效的方格与光线的求交过程。例如对于一个空旷的操场，操场中间放置了一个茶壶，光线到达茶壶之前，需要计算光线和很多空格子求交过程。因此空旷的地方不适合划分太多小格子，用大格子快速跳过空旷位置的计算。均匀划分的方法适合的场景是空间中均匀布满了三角形面，如下图这种场景，物体多的地方适合划分更多的小格子，将需要计算的三角形面限制在更小范围，如果格子太大，就需要将光线和更多的三角面求交：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131120079.png" alt="image-20230513112034871" style="zoom:67%;" />
+
+<p>如下是其他划分方法：</p>
+<p>（1）八叉树，每次将空间分为8个相等的部分，再递归的对子空间进行划分。当划分的子空间足够小或是空间中三角形面的数量很少的时候会停止划分。这种方法的显著缺点是，随着维度的上升划分的空间数量会呈指数级增长。</p>
+<p>（2）KD-Tree，每次将空间划分为两部分，且划分依次沿着x-axis，y-axis，z-axis交替进行，使得空间划分相对均匀，终止条件与八叉树类似。</p>
+<p>（3）BSP-Tree，其与KD-Tree类似，唯一不同的是划分不再沿着固定一轴，可以任意方向划分，缺点是划分的空间没有规则性，对比于AABB来说，求交困难。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131059825.png" alt="image-20230513105950720" style="zoom:67%;" />
+
+<h4 id="KD-Tree空间划分"><a href="#KD-Tree空间划分" class="headerlink" title="KD-Tree空间划分"></a>KD-Tree空间划分</h4><p>​		如下所有操作都在光线追踪之前，对场景预处理，以2维为例。</p>
+<p>​		先将整个场景放在包围盒中，将空间分为两部分：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412006.png" alt="image-20230513141209956" style="zoom: 50%;" />
+
+<p>​		对左右两个子空间换个方向再分为两部分(这里只画出了右半部分，其实左边也是一样)，之后以此类推进一步分割，形成KD-tree。</p>
+<p>（1）依次沿着x-axis,y-axis,z-axis划分，使得空间被划分的更加平衡<br>（2）划分的位置由空间中三角面的分布决定，具体细节不展开<br>（3） 叶子节点存储对应空间的所有物体或三角面信息，中间节点仅存储指针指向两个子空间<br>（4） 当划分空间太小或是子空间内只有少量三角形则停止划分</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412784.png" alt="image-20230513141218740" style="zoom:50%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131416122.png" alt="image-20230513141650076" style="zoom:67%;" /></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>​		对于一条光线，第一步判断光线是否与最外层的包围盒相交，如果相交进一步判断是否与对应的两个子空间相交：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412799.png" alt="image-20230513141228752" style="zoom:50%;" />
+
+<p>​		因图中做了简化，最大包围盒的左半边并没继续进行划分(实际上应该要划分的)，所以左半部分对应的1号空间是叶子节点，如果光线与之相交，进一步判断与存储在叶子节点的物体求交。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412090.png" alt="image-20230513141238041" style="zoom:50%;" />
+
+<p>​		左半边判断完之后，接着判断右半部分，如果对于右半部分存在相交情况，则对于右半部分的所有子空间，递归的执行这个步骤即可：</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131444748.png" alt="image-20230513144410699" style="zoom: 50%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412368.png" alt="image-20230513141258321" style="zoom:50%;" /></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131427636.png" alt="image-20230513142703588"></td>
+<td><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131427025.png" alt="image-20230513142754978"></td>
+</tr>
+</tbody></table>
+<p>​		利用KD-Tree的结构来对空间划分AABB包围盒的好处是倘若光线与哪一部分空间不相交，那么则可以省略该部分空间所有子空间的判断过程，提升了效率。缺点是判断包围盒与三角面的是否相交较难，因此划分的过程不是那么想象的简单，其次同一个三角形面或物体可能被不同的包围盒同时占有，不同包围盒内的叶节点会同时存储这一个三角形面或物体。</p>
+<h4 id="BVH物体划分"><a href="#BVH物体划分" class="headerlink" title="BVH物体划分"></a>BVH物体划分</h4><p>​		BVH与前几种方法最显著的区别就是，不再以空间作为划分依据，而是从物体对象的角度考虑，即三角形面（物体）。作业中的实现方法如下：</p>
+<p>​		第一步同样找出场景的整体包围盒作为根节点。该包围盒需要包围住所有物体对象的包围盒（每个物体对象自己也有包围盒）:</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131453263.png" alt="image-20230513145329220" style="zoom:50%;" />
+
+<p>​		第二步找到合适的划分点，将最大包围盒内的三角形面分为两部分，再分别重新就算新的包围盒。关于找到合适的划分点：划分顺序可以按照xyz轴。不过为了划分均匀，也可以每次划分一般选择包围盒最长的那一轴划分，假设是x轴，n个物体对象从左到右，找到中位数的物体对象进行左右划分（对于x轴，将物体对象包围盒中心坐标按照x排序，找到中间的物体对象），如此便能保证划分的左右两边物体对象数量尽可能差不多。（也可以直接将轴分成左右两部分，坐标小于轴中点将其划分到左边）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131454548.png" alt="image-20230513145402505" style="zoom:50%;" />
+
+<p>​		注意到这里，包围盒会重叠，但一个物体对象只会被存储在唯一的包围盒内，而这也就解决了KD-Tree的缺点。接下来与KD-Tree的建立类似，递归的对所有子空间重复该步骤（如何划分使得重叠部分更少很有讲究），当叶子节点物体对象个数足够少停止（一般≤5）。</p>
+<p>​		如果不是叶子节点，需要记录指向左右子节点的指针以及自己的包围盒。如果只剩下一个物体对象，则生成叶子节点，叶子节点需要除了上述信息还需要记录物体对象信息（以叶子节点中一个物体对象为例）。如果只剩下两个物体对象，为当前节点生成两个叶子节点即可。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131454256.png" alt="image-20230513145433211" style="zoom:50%;" />
+
+<p>​		之后判断光线与包围盒求交的步骤同KD-Tree。BVH不需要判断包围盒和物体对象的关系。判断过程如下：</p>
+<p>1、当前节点所代表的大的包围盒与光线无交点：则不用计算左右子树。返回空交点。</p>
+<p>2、当前节点所代表的大的包围盒与光线有交点：如果为叶子节点，计算包围盒内部的物体对象与光线的相交情况；如果还有左右子树，则递归处理左右子树。</p>
+<p>计算包围盒内部的物体对象与光线的相交情况:</p>
+<p>例如，当一个物体非常复杂，比如进行模型加载。在加载模型时，需要将网格模型变成多个三角形对象。将这些三角形作为物体对象，构建新的bvh树。计算包围盒内部的物体对象与光线的相交情况前，先计算光线和物体的bvh树，如果到达叶子节点，就是光线和三角形求交。</p>
+<p>最后得到的应该是与该光线相交的最近的交点及物体信息。</p>
+<h5 id="使用SAH进一步加速BVH"><a href="#使用SAH进一步加速BVH" class="headerlink" title="使用SAH进一步加速BVH"></a>使用SAH进一步加速BVH</h5><p>当物体&#x2F;三角形分布不均匀的时候，上面将轴分成两半&#x2F;将物体个数分成左右两半得到的划分结果会变得很差。例如在左边有大量物体，右侧只有一个。如下左侧是按照原始方法划分的结果。由于划分时要尽可能减少划分后两部分包围盒重叠的体积，因为重叠的体积越大，光线穿过重叠区域的可能性越大，遍历两个子树的可能性就越高，计算消耗越多。所以原始划分方法是在物体跨度最大的轴上进行划分。结合物体分布不均匀以及尽可以减少重叠面积两个问题，新方法采用基于表面积的启发式评估划分方法。如右侧。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121932438.png" alt="image-20230712193236384" style="zoom:67%;" />
+
+<p>该方法通过对求交代价和遍历代价进行评估，给出了每一种划分的代价，而目的是去寻找代价最小的划分。假设当前节点的包围体中存在 n 个物体，设对每一个物体求交的代价为 t(i) ，如果不做划分依次对其求交则总的代价为：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121932798.png" alt="image-20230712193222770" style="zoom:67%;" />
+
+<p>如果这些物体划分为2组，这两组物体分别处于它们的包围盒A和B中。设光线击中它们的概率分别为 p(A) 和 p(B) 。p(A)的概率等于A包围盒大小&#x2F;包含AB的大包围盒大小；p(B)的概率等于B包围盒大小&#x2F;包含AB的大包围盒大小。AB并不一定会填满其父节点的包围体，并且AB可能存在重叠，因此 p(A) 和 p(B) 的和不一定为1，且它们的和越大说明 A 和 B 的重叠程度越大。综上所述，当前节点求交的代价可以写为</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121934320.png" alt="image-20230712193448279" style="zoom:67%;" />
+
+<p>其中 ttrav 表示遍历树状结构的代价。一般来说，假设对所有图元的求交代价是相同的，可设 t(i)&#x3D;1 ，又遍历的代价小于求交的代价，可设 ttrav&#x3D;0.125 。设包围盒A中图元的个数为 a ，B中图元的个数为 b ，则：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121935558.png" alt="image-20230712193513520" style="zoom:80%;" />
+
+<p>光线击中包围盒的概率可以根据包围体的表面积来估计，即在父节点的包围体C中，A和B的表面积越大它们被击中的概率也就越大，设 A ， B 和 C 的表面积为 S(A) ， S(B) 和 S(C) ，则有：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121935924.png" alt="image-20230712193532895" style="zoom:67%;" />
+
+<h4 id="辐射度量学Radiometry"><a href="#辐射度量学Radiometry" class="headerlink" title="辐射度量学Radiometry"></a>辐射度量学Radiometry</h4><p>​		在Blinn-Phong模型中，光的能量用常数I表示，没有单位和一个准确的定义。该模型在计算高光的时候，只考虑是否能看见高光，不考虑实际接收到的能量，即光线方向和法线的关系。whited-style的光线追踪模型中，认为所有反射都是完美镜面反射，对于漫反射的光线没有进行追踪，直接用当前点的颜色。并且光在多次折射和反射中会有能量损失，能量损失的值是自定义的。</p>
+<p>（1）Radiant Energy:光源辐射出能量Q[J]</p>
+<p>（2）Radiant flux:单位时间内光源辐射出的能量（时间越长能量越多，在辐射度量学中考虑单位时间的性质）光源包含的各种波长（对应一种颜色）的能量。	即如下函数的总面积。计算机图形使用RGB作为辐射通量表示的简化。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131520260.png" alt="image-20230513152037223" style="zoom: 67%;" />
+
+<p>（3）Radiant intensity：单位时间光源在单位立体角（某个方向）上辐射出的能量</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131526426.png" alt="image-20230513152636391" style="zoom: 67%;" />
+
+<p>​		弧度制，数学术语，指用弧长与半径之比度量对应圆心角角度的方式。用符号rad表示，读作弧度。等于半径长的圆弧所对的圆心角叫做1弧度的角。由于圆弧长短与圆半径之比，不因为圆的大小而改变，所以弧度数也是一个与圆的半径无关的量。（圆周长2 πR，面积 πR^2）整个圆的弧度为2 π。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131529358.png" alt="image-20230513152911322" style="zoom:67%;" />
+
+<p>​		对应在三维上的球的弧度(立体角)的计算方式如下，立体角度所对应球上的投影面积比上半径的平方，整个球的立体角为4 π 。（球表面积 4πR^2）（投射到单位求上截面的面积。可以当作一个带有体积的方向。）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131529984.png" alt="image-20230513152919949" style="zoom:67%;" />
+
+<p>​		利用微分立体角dw定义一个方向（就好比用一个浮点数定义一个时间），计算如下：通过θ,ϕ确定空间中一个方向，在这两个角度上分别增加一个微分值，其中rdθ 是微分面积元的高，rsinθdϕ 是微分面积元的宽，二者相乘是微分立体角在球面上的面积。用该微分面积除以半径的平方即为微分立体角的值。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131534431.png" alt="image-20230513153447386" style="zoom: 67%;" />
+
+<p>​		对dw在整个球上积分，积分结果为4π。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131536006.png" alt="image-20230513153620960" style="zoom: 67%;" />
+
+<img src="C:\Users\华为\AppData\Roaming\Typora\typora-user-images\image-20230513153752040.png" alt="image-20230513153752040" style="zoom:67%;" />
+
+<p>​		对各向同性点光源，所有方向上的亮度都与方向无关，所以I是一个常数，因此对Φ积分时只用对立体角积分。最后推算出的I是一个常数。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-13-Ray-Tracing1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/13/games101-13-Ray-Tracing1/"
+    >games101-13-Ray_Tracing1</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/13/games101-13-Ray-Tracing1/" class="article-date">
+  <time datetime="2023-05-13T05:44:01.000Z" itemprop="datePublished">2023-05-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="Whitted光线追踪如何处理全局光照"><a href="#Whitted光线追踪如何处理全局光照" class="headerlink" title="Whitted光线追踪如何处理全局光照"></a>Whitted光线追踪如何处理全局光照</h4><p>​		光栅化不适合处理全局的效果。如软阴影、磨砂材质、间接光照（光反射多次后到达相机）。在之前的光栅化处理中，只考虑光的一次反射，从光源到达着色点再到达相机。光栅化渲染快，常用于实时渲染（每秒超过30帧）</p>
+<p>假设：</p>
+<p>（1）光线沿着直线传播</p>
+<p>（2）光线和光线不会发生碰撞</p>
+<p>（3）光线路径可逆，即从A发出的到B的光线，一定也可以从B发出到A（中途可发生反射和折射）</p>
+<p>​		从人眼或摄像机向近投影平面上的每一个像素点发射一条光线，判断与场景物体的交点。一条光线可能会与不止一个物体相交，但是考虑遮挡关系，只去找最近的交点（相当于进行了深度测试）。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121407903.png" alt="image-20230512140740839" style="zoom:67%;" />
+
+<p>​		由于要计算每一个片元的值，因此需要以相机为起点，向每一个像素都发射一条光线。在view空间下进行计算，需要将屏幕的像素中心坐标，变到view空间下。（相机在原点看向-z轴）</p>
+<p>​		view空间变到屏幕空间的过程：透视视锥体（宽高比&#x3D;屏幕宽高比）压缩成正交长方体，将正交长方体压缩到[-1,1]的正方体。z值用于深度测试，将[-1,1]的xy拉伸到屏幕的[0,w]和[0,h]。</p>
+<p>​		逆变换：将屏幕上的像素中心坐标先变换到[0-1]，再变换到[-1,1]（注意opengcv的y轴朝下，这一步需要将y轴变换朝上）。将[-1,1]拉伸到与屏幕相同的宽高比，但是xy（或者说平面宽高）具体是多少由可视角度和距相机的距离决定。得到view空间下近平面上的坐标（近平面大小）。屏幕上每一个像素点与view空间下近平面上每一个点一一对应。也就是以相机为起点，向近平面像素的对应点都发射一条光线，判断与场景物体的交点。</p>
+<p>​		不进行优化的找最近交点的方式：对于一根光线，遍历场景中的每一个物体对象。对于每一个对象，如果是网格对象，将光线与网格对象的每一个三角形求交，记录最近的三角形（距离、交点重心坐标和三角形索引等）。如果是类似球的隐式几何体，直接带入求解。遍历物体对象时，如果光线与物体有交点，还得确保比上一个对象的交点更近。最后记录最近的物体对象及三角形信息。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121409264.png" alt="image-20230512140905212" style="zoom:67%;" />
+
+<p>​		还是针对一根光线：接着连接该交点和光源，只要判断这条连线之间是否有物体存在就可以知道该交点是否在阴影之中。新的光线，光源起点为着色点，光线方向为光源-着色点。对新的光线类似于从相机发射的光线那样进行光线追踪。判断是否有更近的交点。如果该点不在阴影中，知道该点的法线（三角形可以用两条边叉乘再归一化，球体就是着色点-球心再归一化）、相机位置和光源位置，可以利用blinn-phong计算出该点对应的像素值。遍历所有近投影平面上的像素就能得到一张完整的图像。此时效果与局部光照模型是一样的，只考虑了光一次反射，计算得到的是硬阴影。（相当于光线直接打在物体上，由于是漫反射，一定有一根光线会进入相机）</p>
+<p>​		上一个例子中光线第一个与圆球物体相交，假设该圆球是一个镜面球，那么便会发生镜面反射。如果是玻璃球，除了镜面反射之外，也存在折射，同时反射与折射出去的光线可能与场景中的物体再次碰撞，发生第二次折射与反射。下图以两个光线，以两次折射或反射的部分光线为例。（全局光照重点是考虑间接光照，及光的多次反射&#x2F;折射）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121413323.png" alt="image-20230512141359281" style="zoom:67%;" />
+
+<p>​		此时每一个像素的颜色贡献来自直接光照，反射方向间接光，折射方向间接光（如果有折射的话）。下一步将这些所有交点（上图中4个交点）与光源连接，计算这些所有点的局部光照模型的结果（被遮挡就不用计算），将其按照光线能量权重累加(光在传播过程中会有损失，如果不添加权值最后会发生曝光)，最终得到近投影平面上该像素点的颜色。这是一个全局光照模型，不仅仅考虑了直接光源的贡献，还考虑各种折射与反射光线的贡献。</p>
+<p>​		具体做法是，求出镜面反射的光线（或折射光线），此时这条光线不一定指向光源。因此对该光纤进行递归处理（与上述单单追踪不同）。如果该光线碰到的是镜面物体，则继续反射递归；碰到的是透明物体继续反射+折射递归。递归的此处有最大限制，不能无限递归。如果在有限递归次数内，相交到漫反射物体，不再继续反射和折射，进行光照计算。为了防止结果过亮，每次反射&#x2F;折射都有损失。菲涅尔项得到反射率为k，折射率为1-k。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121414958.png" alt="image-20230512141440915" style="zoom:67%;" />
+
+<p>​		上图中的光线分成三种类别，相机到物体为primary ray；中间反射和折射的蓝线为secondary  ray；最后交点与光源的连线为shadow ray，因为要考虑遮挡。</p>
+<h4 id="如何判断光线与物体的交点"><a href="#如何判断光线与物体的交点" class="headerlink" title="如何判断光线与物体的交点"></a>如何判断光线与物体的交点</h4><h5 id="光线与隐式几何求交"><a href="#光线与隐式几何求交" class="headerlink" title="光线与隐式几何求交"></a>光线与隐式几何求交</h5><p>​		通过光源位置O和光线方向d定义一条光线（光线是射线）：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121420925.png" alt="image-20230512142046886" style="zoom: 50%;" />
+
+<p>​		光线与球求交，t值对应的点需要满足两个表达式：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121424656.png" alt="image-20230512142416606" style="zoom: 67%;" />
+
+<p>​		光线与球求交可能会没有交点、有一个交点或者有两个交点。在有两个交点的情况下，取更小的t值。（并且保证更小的t必须是实数且为非负数）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121424151.png" alt="image-20230512142454099" style="zoom: 50%;" />
+
+<p>​		对于光线与隐式表面的交点，只要将光线方程代入求解 t 即可：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121502542.png" alt="image-20230512150218495" style="zoom:67%;" />
+
+<h5 id="光线与显示几何求交"><a href="#光线与显示几何求交" class="headerlink" title="光线与显示几何求交"></a>光线与显示几何求交</h5><p>​		对于显示表面，最重要的是判断光线如何与三角形求交（只考虑0&#x2F;1个交点）。如下图可以将该光线与所有三角形面求交，找到最小的t值。对于多个像素（多条光线）都与所有面计算，计算量相当大。总计算量为像素数（一个像素一个光线）✖三角形面。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121507126.png" alt="image-20230512150709077" style="zoom:67%;" />
+
+<p>​		判断光线与三角形所在平面是否有交点，如果有交点再判断该点是否在三角形内部。</p>
+<p>​		首先通过一个点和法线定义一个平面。如果任意一点和该点的连线与法线垂直，则说明该点在平面上。将p和n用xyz定义，展开后如右式。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121515786.png" alt="image-20230512151503743" style="zoom:67%;" />
+
+<p>​		得到参数 t 之后，可以计算出交点，并且再去计算出重心坐标就能判断该交点是否在三角形内。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121520092.png" alt="image-20230512152052037" style="zoom: 50%;" />
+
+<p>​		如下方法直接判断光线在三角形内部是否有交点。假设该点在三角形内，则可以通过重心坐标表示。通过如下方法解出t,b1,b2。如果t,b1,b2,1-b1-b2都是非负数，则该点在三角形内部（注意要判断4项，x是叉乘，.是点乘）。</p>
+<p>​		<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121520552.png" alt="image-20230512152025494" style="zoom: 50%;" /></p>
+<h5 id="光线与包围盒求交"><a href="#光线与包围盒求交" class="headerlink" title="光线与包围盒求交"></a>光线与包围盒求交</h5><p>​		使用包围盒加速光线与物体求交。三维空间常用的包围盒是AABB包围盒，即一个长方体。包围盒是由3个对面形成的交集。以二维为例，计算出光线进入两个对面的时间，和光线出两个对面的时间。将第一幅图和第二幅图的线段做交集。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121549035.png" alt="image-20230512154907983" style="zoom:67%;" />
+
+<p>​		对于三维场景来说，光线进入一个盒子，就说明三个对面都要满足光线已经进入（对所有的进入时间tmin取最大值）；光线离开一个盒子，只要满足光线离开任意一个对面（对所有的离开时间tmax取最小值）。如果进入时间小于离开时间，光线一定会在盒子中停留一段时间，即有交点。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121559857.png" alt="image-20230512155903819" style="zoom: 67%;" />
+
+<p>​		使用AABB便于计算，之前计算光线与任意平面求交计算很复杂。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121628668.png" alt="image-20230512162803617" style="zoom:67%;" />
+
+<p>​		如果光线离开盒子的时间＜0，说明盒子在光线背后。如果离开盒子的时间≥0，但是进入盒子的时间＜0，说明光线起点在盒子内部。如果离开时间＜进入时间，则没有交点。当且仅当进入时间小于离开时间，且离开时间≥0，光线与盒子有交点。（不考虑平行，光源在盒子内部也算有交点）</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121642550.png" alt="image-20230512164222503" style="zoom: 67%;" /></th>
+<th align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121643720.png" alt="image-20230512164312676" style="zoom:67%;" /></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305121652618.png" alt="image-20230512165258572" style="zoom:67%;" /></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-12-Geometry3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/12/games101-12-Geometry3/"
+    >games101-12-Geometry3</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/12/games101-12-Geometry3/" class="article-date">
+  <time datetime="2023-05-12T10:44:12.000Z" itemprop="datePublished">2023-05-12</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="细分"><a href="#细分" class="headerlink" title="细分"></a>细分</h4><p>​		分出更多的三角形，并且让三角形的位置发生变化，使得原来的模型边的更加精细。所以细分分为两个步骤：增加顶点（面）和对点的位置进行调整。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111940872.png" alt="image-20230511194013793" style="zoom:67%;" />
+
+<h5 id="Loop细分"><a href="#Loop细分" class="headerlink" title="Loop细分"></a>Loop细分</h5><p>​		取三角形三条边的中点，用三个中点组成新的三角形，原来的三角形会被细分成四个三角形。以不同的规则调整旧顶点和新生成顶点的位置。如下对于一个新生成的点，且该点所在的边被两个三角形共享，按照如下公式进行加权计算，使得顶点位置改变后，表面相对平滑。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111945734.png" alt="image-20230511194542678" style="zoom: 67%;" />
+
+<p>​		对于旧的顶点，一个旧顶点可能被多个三角形共享。按照如下公式利用权值、自己的顶点坐标和周围相邻的顶点坐标进行加权计算，如果周围相邻的点多，受周围点的影响就更大。其中n是该点的度，就是该点连接了几条边，u的取值受n值影响。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111946343.png" alt="image-20230511194635296" style="zoom:67%;" />
+
+<p>​		Loop细分结果如下，注意该方法只能对三角形网格进行细分，如果对四边形网格，需要其他的细分方法：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111952456.png" alt="image-20230511195211382" style="zoom:67%;" />
+
+<h5 id="Catmull-Clark细分"><a href="#Catmull-Clark细分" class="headerlink" title="Catmull-Clark细分"></a>Catmull-Clark细分</h5><p>​		定义四边形面（quad face)和非四边形面（Non-quad face）</p>
+<p>​		奇异点：度不为4点</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112020896.png" alt="image-20230511202020854" style="zoom: 50%;" />
+
+<p>​		取每个面的中点，以及网格面每个边的中点，连接这些中点。如下图所示，现在图中有4个奇异点。只要原来的面不是四边形面，新增的点一定是奇异点。第一次细分，每个非四边形面会引入一个新的奇异点，但是非四边形面会消失，也就是不会再增加奇异点。</p>
+<table>
+<thead>
+<tr>
+<th align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112023594.png" alt="image-20230511202351551" style="zoom: 50%;" /></th>
+<th align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112030671.png" alt="image-20230511203019621" style="zoom: 50%;" /></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112030336.png" alt="image-20230511203041212" style="zoom:50%;" /></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>​		用如下方法对新增的点和旧的点进行调整，使得表面相对平滑：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112034363.png" alt="image-20230511203420316" style="zoom: 67%;" />
+
+<h4 id="简化"><a href="#简化" class="headerlink" title="简化"></a>简化</h4><p>1.为了提升性能，节省空间，需要使用更简化的模型。</p>
+<p>2.根据场景决定模型的精细程度，比如对于远距离的物体，可以简化模型（类似Mipmap，但是几何的层次结构，以及不同层次结构之间的过度很难）。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112044769.png" alt="image-20230511204425706" style="zoom:67%;" />
+
+<p>​		一种简化方法，边坍缩,如下图将一条边连接的两个顶点变成一个顶点，然后该边就不存在了。但随之而来的问题就是，曲面简化需要尽量保持原本模型的大致形状，如何坍缩一条边，或者说坍缩哪一条边能够使得原模型样貌被改变的程度最小，这就是曲面简化的关键所在。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112050293.png" alt="image-20230511205051245" style="zoom: 67%;" />
+
+<p>​		如左图，将上面两条边坍塌成一个点，如果将该点的坐标用五个顶点或者上面三个顶点的进行平均，得到的结果会比原来的形状小一圈。为此引入一个度量，即二次误差度量(Quadric Error Metrics)。即计算坍缩之后蓝色新顶点所在的位置与原来各个平面的垂直距离的平方和。如果能够使得这个误差最小那么对整个模型样貌修改一定程度上也会较小。误差最小的位置就是最后新顶点的位置。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112054659.png" alt="image-20230511205433625"></p>
+<p>​		对于整个物体，坍缩流程如下，通过局部最优解得到全局最优解：</p>
+<p>（1）为模型每条边赋值，其值为坍缩这条边之后，代替两个老顶点的新顶点所能得到的最小二次误差度量</p>
+<p>（2）选取权值最小的边做坍缩，新顶点位置为原来计算得出使得二次误差最小的位置</p>
+<p>（3） 坍缩完之后，与之相连其他的边的位置会改动，更新这些边的权值</p>
+<p>（4）重复上述步骤，直到到达终止条件</p>
+<h4 id="阴影贴图Shadow-Mapping"><a href="#阴影贴图Shadow-Mapping" class="headerlink" title="阴影贴图Shadow Mapping"></a>阴影贴图Shadow Mapping</h4><p>​		光栅化不能很好的处理全局光照，例如阴影。光栅化具有局部性，只考虑着色点和光源、相机的关系，而不考虑该点是否被遮挡，在阴影内（相对于光源被遮挡，但是相机可以看见）。Shadow Mapping在光栅化的情况下处理阴影，但只能处理点光源。并且生成的阴影具有明显边界，一个点在阴影中&#x2F;不在阴影中。</p>
+<p>​		如果一个点不在阴影内，说明相机可以看到该点，光源也可以看到该点。一个点在阴影内，说明相机可以看到该点，光源不能看到该点。</p>
+<p>​		首先从光源看向场景，根据深度测试的思想记录每个像素最前的深度。如下图是从光源的角度看场景：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112331421.png" alt="image-20230511233126307" style="zoom:67%;" />
+
+<p>​		如下图是生成的shadow maps，即光源视角的Z-buffer，但是是存在一张纹理图中：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112331418.png" alt="image-20230511233142306" style="zoom:67%;" />
+
+<p>​		从设定好的相机位置看向场景。将所有摄像机视角可见点，计算与光源的距离。再找到该点对应的shadow mapping上记录的深度值，如果二者相等，则表明该点能被相机和光源同时看到，不在阴影中，反之在阴影中。</p>
+<table>
+<thead>
+<tr>
+<th align="center">在阴影中</th>
+<th align="center">不在阴影中</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112328210.png" alt="image-20230511232856119" style="zoom: 67%;" /></td>
+<td align="center"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112326631.png" alt="image-20230511232651546" style="zoom:67%;" /></td>
+</tr>
+</tbody></table>
+<p>问题：如浮点数难以判断相等，会出现精度问题 ;该方法只适合点光源，生成硬阴影。在光源有一定大小，会存在软阴影。光源具有体积，导致有的地方完全看不到光源(本影, Umbra), 有的地方能看到一部分光源(半影，Penumbra)。所以阴影的边缘会有过渡的情况，从而产生软阴影现象。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305112341363.png" alt="image-20230511234128954" style="zoom: 33%;" /> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-11-Geometry2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/11/games101-11-Geometry2/"
+    >games101-11-Geometry2</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/11/games101-11-Geometry2/" class="article-date">
+  <time datetime="2023-05-11T04:36:59.000Z" itemprop="datePublished">2023-05-11</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="显示几何"><a href="#显示几何" class="headerlink" title="显示几何"></a>显示几何</h4><h5 id="点云"><a href="#点云" class="headerlink" title="点云"></a>点云</h5><p>​		不考虑物体是一个表面，而是考虑物体由点组成，只要点的数量足够多，就可以变成物体表面。空间中每一个点由（x,y,z)表示。理论上只要点足够密集，可以表示任何几何，由点变成多边形面。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111242600.png" alt="image-20230511124237550"></p>
+<h5 id="多边形面"><a href="#多边形面" class="headerlink" title="多边形面"></a>多边形面</h5><p>​		常用三角形面和四边形面，如下图将任何复杂的几何体拆成三角形面。通过定义各个多边形面的顶点以及顶点之间的连接关系就可以得到许许多多的三角形面或是四边形面，再通过这些面来近似表现出我们想要的模型效果。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111245848.png" alt="image-20230511124525785" style="zoom:67%;" />
+
+<p>​		例如比较著名的.obj文件，其格式如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111247870.png" alt="image-20230511124752805" style="zoom:67%;" />
+
+<p>​		v定义三角形面的三个顶点坐标（立方体8个顶点）；vt定义三角形面的三个顶点uv坐标（每个面4个点，共6个面所以最多有24种不同的纹理坐标信息）；vn定义三角形面的三个顶点的法线坐标（6个面的法线信息，有8个是因为建模软件输出的精度问题）；f定义点的连接关系，哪三个点形成三角形面。如5&#x2F;1&#x2F;1定义三角形的第一个顶点是第5个v，使用第1个vt作为uv该顶点的uv坐标，使用第1个vn作为该顶点的法线坐标。</p>
+<h5 id="贝塞尔曲线"><a href="#贝塞尔曲线" class="headerlink" title="贝塞尔曲线"></a>贝塞尔曲线</h5><p>​		用一系列控制点定义曲线，并且定义曲线满足的一些性质。如下图p0,p1,p2,p3为控制点，该曲线的起始点为p0，结束点为p3，且曲线起始位置的切线沿p0p1方向，结束位置的切线沿p2p3方向（参数3是根据控制点的个数决定的）。曲线不一定要经过p1,p2。可以用任意多个点定义曲线，但2个点只能定义线段。将控制点经过仿射变换后绘制出的还是同一个曲线（仿射变换不包括投影变换）  。所形成的曲线具有凸包性质 ，即曲线一定在在控制点形成的凸包内，不会超出所有控制点构成的凸多边形范围。所以如果四个控制点在一个线段上，最后形成的曲线就是这个线段。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111306969.png" alt="image-20230511130613920" style="zoom: 50%;" />
+
+<p>​		以三个控制点的情况为例：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111307165.png" alt="image-20230511130719131" style="zoom:50%;" />
+
+<p>​		假设曲线起始对应时间0，结束对应时间1，现在要找到0-1中间任意一个时刻所对应曲线上点的位置。假设t&#x3D;1&#x2F;3，取b0b1线段上1&#x2F;3处的点：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111311501.png" alt="image-20230511131116462" style="zoom: 50%;" />
+
+<p>​		取b1b2线段上1&#x2F;3处的点：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111311372.png" alt="image-20230511131143327" style="zoom:50%;" />
+
+<p>​		此时连接上述的两个点形成一个新的线段（两个线段变成一个线段），取这个线段1&#x2F;3处的点，这个点就是t&#x3D;1&#x2F;3时刻，曲线上的点。遍历所有t，就可以获得整条曲线。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111312851.png" alt="image-20230511131222819" style="zoom:50%;" />
+
+<p>​		如下是四个控制迪安的情况，三个线段变成两个线段，两个线段变成一个线段：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111315766.png" alt="image-20230511131501727" style="zoom:50%;" />
+
+<p>​		将上述过程变成代数形式，如下是递归规程：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111317078.png" alt="image-20230511131741041" style="zoom: 67%;" />
+
+<p>​		代数表达式相当于在每个线段上进行插值。以b0b1为例，如果t&#x3D;0，新生成的点在b0处；如果t&#x3D;1，新生成的点在b1处，最后曲线上的点可以通过时间t以及三个控制点的坐标表示（上标表示第几层（从0开始），下标表示该层的第几个点（从0开始），最后一层只有一个点）：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111319182.png" alt="image-20230511131938146" style="zoom:67%;" />
+
+<p>​		第n层也就是最后一层只会新生成一个点，该点可以用每一个控制点和时间t的多项式进行线性组合计算出来，一共n+1项（bj表示第几个控制点（第0层），B表示该控制点对应的关于t的多项式）。该绘制曲线的方法也可以推广至三维，每一个控制点用（x,y,z)定义。该方法属于显示表达，已知t的范围已知映射关系，只要遍历所有的t就可以得到曲线上所有的坐标。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111320523.png" alt="image-20230511132053483" style="zoom: 67%;" />
+
+<p>​		例如由四个控制点，就会有四个关于时间t的多项式，n的值为3，j的值从0-3。四个多项式随时间t的变化如下，在任意一个时刻，四个多项式的和为1：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111323212.png" alt="image-20230511132315175" style="zoom:67%;" />
+
+<h5 id="逐段贝塞尔曲线"><a href="#逐段贝塞尔曲线" class="headerlink" title="逐段贝塞尔曲线"></a>逐段贝塞尔曲线</h5><p>​		当控制点多的时候，不便于计算操作。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111447297.png" alt="image-20230511144704245" style="zoom:50%;" />
+
+<p>​		将一个贝塞尔曲线，用多段贝塞尔曲线组合起来，逐段定义贝塞尔曲线。一般情况下，每一段由四个控制点控制。如下曲线由三段拼接。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111452294.png" alt="image-20230511145214254" style="zoom:50%;" />
+
+<p>​		如果要使得曲线之间的拼接光滑（已知第一个曲线的最后一个控制点和第二个曲线的第一个控制点是同一个点），需要第一个曲线最后一个点的切线和第二个曲线第一个点的切线共线、反向，第一个曲线倒数第二个点和第二个曲线第二个点距离两个曲线重叠的点的距离相同。（如果不相同不能称之为光滑）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111453267.png" alt="image-20230511145338232" style="zoom: 80%;" />
+
+
+
+<p>​		另一种定义曲线的方法叫做B样条曲线。对于多个控制点定义的曲线，如果移动一个点，会使得整条曲线发生变换。现在只想对曲线的局部进行变化，B样条曲线可以在不逐段定义的情况先，控制一个控制点的变化最多影响到曲线的哪一个局部范围内。</p>
+<p>​		对于两段曲线，有重合的点，叫做C0连续：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111628969.png" alt="image-20230511162850925" style="zoom:67%;" />
+
+<p>​		对于两段曲线，不仅有重合的点，重合区域切线等长、共线且相反，叫做C1连续：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111629412.png" alt="image-20230511162918366" style="zoom:67%;" />
+
+<h5 id="曲面"><a href="#曲面" class="headerlink" title="曲面"></a>曲面</h5><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111624270.png" alt="image-20230511162453198" style="zoom:67%;" />
+
+<p>​		首先规定一共4x4 &#x3D; 16个控制点，其水平面位置如图中16个黑点所示(并未表示出高度，防止图形太乱)，将这16个点分成4列，图中红色圈中的为一列的具体例子。第1步在这4个控制点之下利用第一个参数 u得到蓝色点，因为有4列，所以一共可以得到如图所示的4个蓝色点。(灰色曲线分别为每列4个点所对应的贝塞尔曲线)第2步在得到4个蓝色顶点之后，在这四个蓝色顶点的基础之下利用第二个参数 v 可以得出贝塞尔曲面上的正确一点。第3步遍历所有的 u，v值就可以成功得到一个贝塞尔曲面。对于曲面和曲面间如何光滑衔接是更复杂的问题。这里由uv可以映射到曲面上的一个点，所以也是显示表示。</p>
+<h5 id="其他面操作"><a href="#其他面操作" class="headerlink" title="其他面操作"></a>其他面操作</h5><p>对于曲面物体更广泛的操作还是分解成多边形面。</p>
+<p>1.细分：通过将面细分成更多的面（如三角形或者四边形）使得模型精细。</p>
+<p>2.简化：将不破坏大体形状的前提下，使用更少的面（如三角形或者四边形）节省内存空间。</p>
+<p>3.正规化：例如所有组成物体的三角形都为正三角形，这会具有很多很好的性质，但不不能丢失物体原本的表现质量。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305111509325.png" alt="image-20230511150928273"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-5-6-Rasterization"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/07/games101-5-6-Rasterization/"
+    >games101-5/6-Rasterization</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/07/games101-5-6-Rasterization/" class="article-date">
+  <time datetime="2023-05-07T11:58:44.000Z" itemprop="datePublished">2023-05-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="三角形及光栅化"><a href="#三角形及光栅化" class="headerlink" title="三角形及光栅化"></a>三角形及光栅化</h4><p>三角形的好处：</p>
+<p>1.最基础的多边形</p>
+<p>2.三角形内部一定在一个平面</p>
+<p>3.三角形的内外定义清晰</p>
+<p>4.便于插值</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111544303.jpg" alt="img" style="zoom:67%;" /> 
+
+<p>光栅器是位于最终处理过的顶点之后到片段着色器之前所经过的所有算法和过程的总和。</p>
+<p>光栅器会将一个图元的所有顶点作为输入，并将它转换为一系列的片段。顶点坐标理论上可以取任意值，但片段不行，因为它们受限于窗口的分辨率。</p>
+<p>光栅化：判断像素和三角形的位置关系（判断像素中心点（采样点，像素中心与像素坐标区分）和三角形的位置关系）</p>
+<p>采样：被三角形所遮盖的采样点所在的像素处，会生成一个片段。对于三角形边缘，有的采样点没有被三角形内部遮盖，所以不会生成片元，也不会受到片段着色器的影响。由于屏幕像素总量的限制，有些边缘的像素能够被渲染出来，而有些则不会。结果就是使用了不光滑的边缘来渲染图元，导致锯齿边缘。</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111544352.jpg" alt="img"></th>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111544377.jpg" alt="img"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546146.jpg" alt="img"></p>
+<p>可以使用向量叉乘的方法，判断像素中心是否在三角形内部。如果在三角形边上，可以自定义是否属于在三角形内。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546119.jpg" alt="img"> </p>
+<p>使用包围盒可以减少计算量。此处使用轴向包围盒AABB，对窄且长的三角形不友好。窄且长的三角形可以使用右侧方式。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546100.jpg" alt="img"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546178.jpg" alt="img"> </p>
+<p>像素内部颜色在不同设备有不同表现，此处简单认为一个像素内部颜色值相同。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546790.jpg" alt="img"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546772.jpg" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546730.jpg" alt="img"> </p>
+<p>屏幕空间用一些离散的点（像素中心）是否在三角形内进行采样。会产生锯齿。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546706.jpg" alt="img"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546751.jpg" alt="img">  </p>
+<h4 id="Aliasing走样"><a href="#Aliasing走样" class="headerlink" title="Aliasing走样"></a>Aliasing走样</h4><p>采样</p>
+<p>（1）空间中采样：像素所有到达感光元件的光学信息-离散成像素</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111546842.jpg" alt="img"> </p>
+<p>（2）采样除了可以发生在不同位置还可以发生在不同时间</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111547302.jpg" alt="img"> </p>
+<p>Artifcts</p>
+<p>（1）锯齿（空间位置上的采样）</p>
+<p>（2）摩尔纹（空间位置上的采样）</p>
+<p>（3）车轮效应（时间上的采样）</p>
+<p>（4）信号变化太快采样跟不上</p>
+<p>反走样</p>
+<p>采样之前滤波&#x2F;模糊</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111547258.jpg" alt="img"> </p>
+<p>不可采样-模糊：走样后模糊</p>
+<h5 id="频率和周期"><a href="#频率和周期" class="headerlink" title="频率和周期"></a>频率和周期</h5><p>修改系数f改变sin函数和cos函数的频率，频率定义函数变换有多快。频率的倒数是周期，周期定义函数隔多久重复一次</p>
+<h5 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h5><p>傅里叶级数展开：任何一个周期函数，都可以写成一系列sin和cos的线性组合以及一个常数项</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111548357.jpg" alt="img"></p>
+<p>频率从低到高，通过增加更多sin和cos函数，会无限趋近于原周期函数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111548631.jpg" alt="img"> </p>
+<p>傅里叶变换就是通过一些变换使得函数f(x)变成函数F(w)，F(w)通过逆傅里叶变换还原成函数f(x)：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111548413.jpg" alt="img"> </p>
+<h5 id="从时域上看走样"><a href="#从时域上看走样" class="headerlink" title="从时域上看走样"></a>从时域上看走样</h5><p>如下使用同一采样频率对不同频率的函数采样，对于高频函数，使用低频采样无法还原原函数：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111548441.jpg" alt="img"> </p>
+<p>假设有如下黑色和蓝色两个函数，采用如下频率的采样，可以得到相同的采样结果（黑色函数）。同样的采样频率采样两个频率截然不同的函数，得到的结果无法区分，称之为走样。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111549921.jpg" alt="img"></p>
+<h5 id="滤波-amp-时域频域"><a href="#滤波-amp-时域频域" class="headerlink" title="滤波&amp;时域频域"></a>滤波&amp;时域频域</h5><p>去掉一些特定的频率</p>
+<p>傅里叶变换可以将函数从时域变到频域</p>
+<p>此处没有时间信息，指的是是空间中的不同位置，傅里叶变换把图像空间变到频率空间，在频域图中，图中心是低频区域，更亮，图像信息越多，周围是高频区域，更黑，图像信息更少。从中心到边缘，频率逐渐增大，图像信息减少。通过傅里叶变换可以看到任何信号在不同频率的样子。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111549894.jpg" alt="img"> </p>
+<p>高通滤波：去掉低频信息后再将频域图通过逆傅里叶变换恢复到时域图，可以看到只留下了图像内容的边界。由于边界左右发生剧烈变化，是高频信息，因此频域图的高频部分表示图像内容边界。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111549970.jpg" alt="img"> </p>
+<p>低通滤波：去掉高频信息后再将频域图通过逆傅里叶变换恢复到时域图，可以看到图像边界模糊，相当于对图像进行了模糊操作。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111549711.jpg" alt="img"></p>
+<p>留下了不太明显的边界，外围保留越多，边界越明显。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111549683.jpg" alt="img"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111549740.jpg" alt="img"> </p>
+<h5 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h5><p>简单信号的卷积计算：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111549772.jpg" alt="img"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111550328.jpg" alt="img"></p>
+<p>结论：</p>
+<p>（1）时域上用一个滤波器对信号卷积&#x3D;将时域信号和滤波器变成频域后，两个频域的乘积，再通过傅里叶逆变换变成时域</p>
+<p>（2）时域上一个滤波器和信号乘积&#x3D;将时域信号和滤波器变成频域后，用滤波器频域卷积信号频域，再通过傅里叶逆变换变成时域</p>
+<h5 id="从时域和频域看模糊"><a href="#从时域和频域看模糊" class="headerlink" title="从时域和频域看模糊"></a>从时域和频域看模糊</h5><p>如下利用3*3的卷积核对一张图片进行卷积操作，每一个像素的值为周围9个像素值的平均（除以9使得最后的值在0-255）,最后的结果是图片模糊。也可以将图片和卷积核通过傅里叶变换变成频域图，将两个频域图相乘得，通过傅里叶逆变换后得到最终结果。该卷积核的频域图相当于一个低通滤波，使得最后的图像边界模糊。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111550356.jpg" alt="img"> </p>
+<p>如下图左侧是上述卷积核的时域图，右侧是卷积核的频域图。卷积核越大，图片越模糊，过滤掉的高频信息就越多，频域图白色的部分越少。卷积核越小，图片越清晰，极端情况下卷积和小于等于一个像素的大小，图片所有信息都会被保留。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111553952.png" alt="image-20230711155305901"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111550051.jpg" alt="img"> </p>
+<h5 id="从频域看采样"><a href="#从频域看采样" class="headerlink" title="从频域看采样"></a>从频域看采样</h5><p>从频域的角度来看，采样是对频域内容的重复（重复原始信号的频谱）。第一行左侧是一个函数的时域图，右侧是该函数的频域图。第二行左侧是一个冲激函数的的时域图，右侧是该函数的频域图。将函数a和函数c相乘得到函数e，是a函数上一些离散的点（时域上）。将函数a的频域图b和函数c的频域图d进行卷积得到函数e的频域图f，为b的重复。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111550529.jpg" alt="img"> </p>
+<h5 id="从频域看为什么会发生走样现象"><a href="#从频域看为什么会发生走样现象" class="headerlink" title="从频域看为什么会发生走样现象"></a>从频域看为什么会发生走样现象</h5><p>采样频率下降意味着采样点之间间隔很大，这会导致频谱间的间隔非常小。</p>
+<p>因此走样在频域的角度就是频谱发生混叠。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111551931.jpg" alt="img"> </p>
+<h5 id="从频域看反走样"><a href="#从频域看反走样" class="headerlink" title="从频域看反走样"></a>从频域看反走样</h5><p>（1）增加采样率，使得像素和像素之间的间隔更小（但是很多时候分辨率是一定的，不能随意改变）</p>
+<p>（2）先模糊再采样</p>
+<p>模糊在频域上看是去掉高频信息，再采样（重复频谱），如下图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111551950.jpg" alt="img"> </p>
+<p>根据图可以分析出不能先采样（重复频谱），再模糊（掉高频信息）。</p>
+<h5 id="在实际应用中如何进行模糊操作"><a href="#在实际应用中如何进行模糊操作" class="headerlink" title="在实际应用中如何进行模糊操作"></a>在实际应用中如何进行模糊操作</h5><p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111551994.jpg" alt="img"> </p>
+<p>使用一个像素大小的滤波器，在一个像素内部卷积（做平均），此处做平均的方法是根据三角形在这个像素中的覆盖面积。如第一个覆盖1&#x2F;8，则红色1&#x2F;8，白色7&#x2F;8。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111551476.jpg" alt="img"></p>
+<p>使用MSAA的方法计算一个像素中的覆盖面积，将一个像素中间设置更多的采样点，如下是4*4。颜色缓冲的大小会随着子采样点的增加而增加。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111551497.jpg" alt="img"> </p>
+<p>如果是对每一个被遮盖住的子采样点运行一次片段着色器，最后将每个像素所有子采样点的颜色平均一下，这种计算方式会显著降低性能（早期SSAA）。实际MSAA的计算方式是每个图元中的每个像素只运行一次片段着色器。片段着色器所使用的顶点数据会插值到每个像素的中心，所得到的结果颜色会被储存在每个被遮盖住的且通过深度测试的子采样点中。最终这个像素的颜色值是像素内部所有子采样点的平均。如果该像素内部存在被覆盖且深度测试被通过的子样本，则计算像素的最终颜色。如4个采样点中只有2个被遮盖住了，这个像素的颜色将会是三角形颜色与其他两个采样点的颜色（不一定是背景色）的平均值。也就是通过一个像素中新增采样点在在三角形内部的占比来计算像素的颜色值。一个像素中如果有更多的采样点被三角形遮盖，那么这个像素的颜色就会更接近于三角形的颜色。三角形的不平滑边缘被稍浅的颜色所包围后，从远处观察时就会显得更加平滑了。</p>
+<p>不仅仅是颜色值会受到多重采样的影响，深度和模板测试也能够使用多个采样点。对深度测试来说，每个顶点的深度值会在运行深度测试之前被插值到各个子样本中（也就是颜色需要的顶点属性用像素中心的坐标插值，每个像素只运行一次片段着色器，但是深度值是用子样本的坐标插值）。对模板测试来说，对每个子样本，而不是每个像素，存储一个模板值。当然，这也意味着深度和模板缓冲的大小会乘以子采样点的个数。</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111552052.png" alt="image-20230711155217013"></th>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111552404.png" alt="image-20230711155233357"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307111552076.png" alt="image-20230711155247023"></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>MSAA在一个像素中新增采样点是为了近似覆盖率进行模糊操作（包含了采样操作），并没有提高分辨率，并且增大了计算量。</p>
+<p>Ps:对直线进行反走样，可以取直线上点周围临近的四个像素，根据点到像素中心的距离，填充不同深浅的颜色值。MSAA是在一个像素中取四个子采样点。</p>
+<h5 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h5><p>FXAA:图像后期处理，找到边界把边界换成没有锯齿的边界</p>
+<p>TAA：利用上一帧的信息</p>
+<p>超分辨率:DLSS使用深度学习</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-games101-4-Transformation1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/04/games101-4-Transformation1/"
+    >games101-4-Transformation1</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/04/games101-4-Transformation1/" class="article-date">
+  <time datetime="2023-05-04T08:21:05.000Z" itemprop="datePublished">2023-05-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="MVP变换"><a href="#MVP变换" class="headerlink" title="MVP变换"></a>MVP变换</h4><p>局部空间-世界空间-观察空间-裁剪空间-屏幕空间</p>
+<p>局部坐标-世界坐标-观察坐标-裁剪坐标（会变成NDC坐标）-屏幕坐标-光栅化-片元</p>
+<p>​		一般可以直接将坐标定义在世界空间，M矩阵取单位矩阵。（当需要对物体进行修改的时候，在局部空间中来操作更方便；如果要对一个物体做出一个相对于其它物体位置的操作时，在世界坐标系中来操作更方便；）</p>
+<h4 id="View变换"><a href="#View变换" class="headerlink" title="View变换"></a>View变换</h4><p>确定相机坐标系：</p>
+<p>（1）相机位置坐标e</p>
+<p>（2）观察方向g:由相机位置指向目标物体</p>
+<p>（3）视点正方向t</p>
+<p>计算相机坐标系三个轴的方法：</p>
+<p>（1）观察方向向量g:目标物体坐标减相机坐标e,再除以长度变成单位向量</p>
+<p>（2）辅助向量up：一般设置成（0，1，0），认为相机本身不会歪</p>
+<p>（3）向量g×t（e）：通过向量g和辅助向量叉乘得到，此时向量g×t一定垂直于g和t所在平面,再除以长度变成单位向量</p>
+<p>（4）视点正方向t向量：通过向量g×t和g向量叉乘得到，再除以长度变成单位向量</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021622014.png" alt="image-20230702162236905" style="zoom:67%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021622687.png" alt="image-20230702162254649"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>​		如果相机和目标物体的相对位置不变，则最后的观察结果都相同。因此当相机处于任意位置时，可以将相机移动到原点，相机始终看向-z方向，且相机坐标系的剩下两个轴与世界坐标系的两个轴X,Y方向一致。之后将物体坐标进行相同的变换，即可得到相机在原位置时相同的结果（将作用于相机的矩阵作用在物体上）。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021623987.png" alt="image-20230702162356943" style="zoom:67%;" />
+
+<p>下面求解view矩阵：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021624535.png" alt="image-20230702162404488" style="zoom:67%;" />
+
+<p>（1）平移操作，将e点移动到原点</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021624611.png" alt="img"></p>
+<p>（2）旋转操作</p>
+<p>由于计算从相机坐标系到世界坐标系的旋转矩阵较为复杂，因此可以先计算从世界坐标系变换到相机坐标系将y轴旋转到t轴，将z轴旋转到-g轴，将x轴旋转到g×t的轴。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021624681.png" alt="img"></p>
+<p>该操作为将相机坐标系变换到世界坐标系的逆操作，因此求出来的R矩阵为目标R矩阵的逆矩阵，也是目标R矩阵的转置矩阵。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021624648.png" alt="img"></p>
+<p>（3）最后求出的M矩阵如下，对目标物体坐标进行M矩阵变换</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021624731.png" alt="img"></p>
+<h4 id="Projection变换"><a href="#Projection变换" class="headerlink" title="Projection变换"></a>Projection变换</h4><p> <img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021625273.jpg" alt="img"></p>
+<h5 id="Orthographic-projection-正交投影"><a href="#Orthographic-projection-正交投影" class="headerlink" title="Orthographic projection 正交投影"></a>Orthographic projection 正交投影</h5><p>假设相机在原点，看向-z轴。</p>
+<p>将视线范围内的物体(假设在一个立方体中，该立方体通过六个数定义，注意越远z值越小，立方体外的部分都会被剪裁)全部压缩到[-1,1]范围内的正方体中，变成NDC坐标。先将立方体的重心平移到原点，再将立方体进行缩放(此处先不考虑旋转)：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021625714.jpg" alt="img"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021625766.png" alt="img"></p>
+<p>正交投影坐标的相对位置都不会改变，只需将物体全部转换到一个[−1,1]的正方体之中即可（其中x，y坐标便是投影结果，保留z是为了之后的深度检测）。压缩到一个正方体是为了之后的计算更加的方便在转换到屏幕坐标的时候就会重新拉伸回来。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021626160.jpg" alt="img"></p>
+<p>正交投影不会影响w值,w仍为1，进行透视除法后没有任何作用。由于这个原因，正射投影主要用于二维渲染以及一些建筑或工程的程序，在这些场景中更希望顶点不会被透视所干扰。（opengl使用右手坐标系，此处越远z越小，在opengl中NDC坐标会变换成左手坐标，越远z越大）</p>
+<h5 id="Perspective-projection-透视投影"><a href="#Perspective-projection-透视投影" class="headerlink" title="Perspective projection 透视投影"></a>Perspective projection 透视投影</h5><p>(1) 将视锥体压缩成立方体</p>
+<p>距离越远，压缩程度越大，形成近大远小的效果。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021626131.jpg" alt="img"> </p>
+<p>近平面n的xyz坐标不变，远平面f中心的xyz值不变。</p>
+<p>根据相似三角形：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021626190.png" alt="img"></p>
+<p>即</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021626271.png" alt="img"><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021626239.jpg" alt="img"></p>
+<p>（x,y,z,1）,(kx,ky,kz,k!&#x3D;0)都是三维空间中的点（x,y,z）。</p>
+<p>可得矩阵：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627989.png" alt="img"></p>
+<p>近平面n的xyz坐标不变：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627136.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627025.png" alt="img"></p>
+<p>远平面f中心的xyz值不变：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627384.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627068.png" alt="img"></p>
+<p>最后解的<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627191.png" alt="img"></p>
+<p>（2）将立方体变换到[-1,1]的正方体</p>
+<p>将目标物体经过上述变换后，再进行正交投影变换即可：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627125.png" alt="img"></p>
+<p><em><strong>*为什么在（1）中中间压缩的点z值不知道？*</strong></em><br><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627363.png" alt="img"></p>
+<p>Persp-&gt;ortho矩阵会改变顶点的w值（w&#x3D;z＜0），在进行完透视投影的MVP变换后，得离观察者越远的顶点坐标w分量的绝对值越大。顶点坐标的每个分量都会除以它的w分量，距离观察者越远顶点坐标就会越小。（最后的顶点应该被赋值到顶点着色器中的gl_Position输出，OpenGL将会自动进行透视除法和裁剪。）。</p>
+<p>比较更新后的z值和原z值：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627495.png" alt="img"></p>
+<p>因为n≥z≥f，所以(z-n)(f-z)值＞0，因为z＜0，方程最左侧的分数值小＜0，即更新后的z值小于原z值，即透视投影之后，中间物体距离相机更远。所以在推算时不知道z值。</p>
+<p><em><strong>*如何确定视锥体？*</strong></em></p>
+<p>利用垂直可视角度或者水平可视角度、近平面距离、远平面距离（距离相机的距离）以及进平面宽高比(width&#x2F;heigth)可以确定一个视锥体。（在opengl中，可视角度一般取45°，近平面取0.1，远平面100.0f）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627813.jpg" alt="img"> </p>
+<p>如下图所示，相机在原点看向-z轴。已知Y（垂直可视角度）和n，可以计算出height&#x2F;2-&gt;height，通过宽高比可以得到width。远平面可以通过Y和f计算。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627150.jpg" alt="img"> </p>
+<p>如果只是图元(Primitive)，例如三角形，的一部分超出了裁剪体积(Clipping Volume)，则OpenGL会重新构建这个三角形为一个或多个三角形让其能够适合这个裁剪范围。</p>
+<h4 id="视口变换"><a href="#视口变换" class="headerlink" title="视口变换"></a>视口变换</h4><p>屏幕可以看作一组x<em>y的像素数组，数组的大小x</em>y为分辨率。此处认为在一个像素内部颜色不变，像素的颜色值通过RGB三个0-255之间的数表示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627542.jpg" alt="img"> </p>
+<p>像素坐标从（0，0）到（x-1，y-1）。像素（x，y）的中心在（x+0.5，y+0.5）,这些像素的覆盖范围从（0，0）到（x，y）。</p>
+<p>视口变换就是将物体坐标从[-1,1]的正方体变到x*y的屏幕。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627754.jpg" alt="img"> </p>
+<p>该变换与z无关，z保持不变用于后续深度测试。先把正方体的x、y进行缩放</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627215.png" alt="img"></p>
+<p>再将缩放后的立方体中心平移到屏幕中心：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021628869.png" alt="img"></p>
+<p><em><strong>*为什么不能先平移再缩放？*</strong></em></p>
+<p>缩放会将每个坐标以原点为中心进行缩放（也就是位移向量也会被缩放），而不是物体中心，如下白色正方形按照缩放矩阵缩小一半的结果是蓝色正方形而不是红色正方形。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307021627809.jpg" alt="img"> </p>
+<p>显示图像：将显存中的一块区映射到屏幕。</p>
+<p>（区分 view变换：先平移再旋转 正交投影：先平移再缩放）</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+        <li>
+          <a href="http://www.beian.miit.gov.cn/" target="_black">赣ICP备2021001676号</a>
+        </li>
+        
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friend">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/journal">日志</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1441758494&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

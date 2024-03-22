@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    games101-14-Ray-Tracing2 |  Hexo
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-games101-14-Ray-Tracing2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  games101-14-Ray-Tracing2
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/14/games101-14-Ray-Tracing2/" class="article-date">
+  <time datetime="2023-05-14T01:45:04.000Z" itemprop="datePublished">2023-05-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games101/">games101</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">12 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>​		如果整个场景只有一个极其复杂的单一人物模型，那么只对这一个物体做包围盒的话，相当于对效率没有任何提升。如果整个场景充斥着大量的细小模型，如草，花之类的，每个模型可能只有很少的面，如果此时对每个物体求包围盒，得到的包围盒数量会相当之多，对于光线追踪效率来说效率提升有限。基于以上两点考虑，AABB并不应只局限于以物体模型为单位，因此如何更好的划分场景形成不同的AABB，使得划分之后的AABB能够更好的加速光线追踪，就是接下来要考虑的问题关键。</p>
+<h4 id="均匀空间划分"><a href="#均匀空间划分" class="headerlink" title="均匀空间划分"></a>均匀空间划分</h4><p>（1）对所要考虑的场景找一个包围盒：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131029114.png" alt="image-20230513102915947" style="zoom:50%;" />
+
+<p>（2）在光线追踪之前，均匀用小格子划分这个大包围盒（相当于把场景均匀划分成更小的AABB包围盒）：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131029151.png" alt="image-20230513102934066" style="zoom:50%;" />
+
+<p>（3）标记出与物体表面相交的格子(不包括物体内部)，存储物体模型信息:</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131029586.png" alt="image-20230513102953483" style="zoom:50%;" />
+
+<p>（4）根据光线的方向与判断出所有与光线相交的格子(这一步可以利用bresenham算法，如对于朝右上方的光线，光线经过的下一个格子为当前格子的右边或者上边的格子，求交点找更近的格子)，倘若格子还与物体表面相交，就说明光线可能会和物体相交，再进一步将光线与格子中的物体模型或是三角形面求交。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131030156.png" alt="image-20230513103007070" style="zoom:50%;" />
+
+<p>问题1：小格子的大小</p>
+<p>​		在该方法中，更多的计算是光线与AABB包围盒（小格子）而不是物体，通过包围盒把计算的三角形面限制在更小的范围内，所以某种程度上可以加速计算。但是格子的大小也会影响计算速度。在极端情况下，假如格子的大小为1✖1,相当于没有进行划分。如果格子太过密集，要计算的小格子很多，也会影响计算速度。较好的划分程度为格子数&#x3D;C✖物体个数，在3维情况下C的值一般取27。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131046138.png" alt="image-20230513104601004" style="zoom: 50%;" />
+
+<p>问题2：均匀划分场景引发的问题</p>
+<p>​		如果说场景较为空旷，物体较小且分离得比较开，那么均匀分割的效果就会很差了，因为会有很多无效的方格与光线的求交过程。例如对于一个空旷的操场，操场中间放置了一个茶壶，光线到达茶壶之前，需要计算光线和很多空格子求交过程。因此空旷的地方不适合划分太多小格子，用大格子快速跳过空旷位置的计算。均匀划分的方法适合的场景是空间中均匀布满了三角形面，如下图这种场景，物体多的地方适合划分更多的小格子，将需要计算的三角形面限制在更小范围，如果格子太大，就需要将光线和更多的三角面求交：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131120079.png" alt="image-20230513112034871" style="zoom:67%;" />
+
+<p>如下是其他划分方法：</p>
+<p>（1）八叉树，每次将空间分为8个相等的部分，再递归的对子空间进行划分。当划分的子空间足够小或是空间中三角形面的数量很少的时候会停止划分。这种方法的显著缺点是，随着维度的上升划分的空间数量会呈指数级增长。</p>
+<p>（2）KD-Tree，每次将空间划分为两部分，且划分依次沿着x-axis，y-axis，z-axis交替进行，使得空间划分相对均匀，终止条件与八叉树类似。</p>
+<p>（3）BSP-Tree，其与KD-Tree类似，唯一不同的是划分不再沿着固定一轴，可以任意方向划分，缺点是划分的空间没有规则性，对比于AABB来说，求交困难。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131059825.png" alt="image-20230513105950720" style="zoom:67%;" />
+
+<h4 id="KD-Tree空间划分"><a href="#KD-Tree空间划分" class="headerlink" title="KD-Tree空间划分"></a>KD-Tree空间划分</h4><p>​		如下所有操作都在光线追踪之前，对场景预处理，以2维为例。</p>
+<p>​		先将整个场景放在包围盒中，将空间分为两部分：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412006.png" alt="image-20230513141209956" style="zoom: 50%;" />
+
+<p>​		对左右两个子空间换个方向再分为两部分(这里只画出了右半部分，其实左边也是一样)，之后以此类推进一步分割，形成KD-tree。</p>
+<p>（1）依次沿着x-axis,y-axis,z-axis划分，使得空间被划分的更加平衡<br>（2）划分的位置由空间中三角面的分布决定，具体细节不展开<br>（3） 叶子节点存储对应空间的所有物体或三角面信息，中间节点仅存储指针指向两个子空间<br>（4） 当划分空间太小或是子空间内只有少量三角形则停止划分</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412784.png" alt="image-20230513141218740" style="zoom:50%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131416122.png" alt="image-20230513141650076" style="zoom:67%;" /></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>​		对于一条光线，第一步判断光线是否与最外层的包围盒相交，如果相交进一步判断是否与对应的两个子空间相交：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412799.png" alt="image-20230513141228752" style="zoom:50%;" />
+
+<p>​		因图中做了简化，最大包围盒的左半边并没继续进行划分(实际上应该要划分的)，所以左半部分对应的1号空间是叶子节点，如果光线与之相交，进一步判断与存储在叶子节点的物体求交。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412090.png" alt="image-20230513141238041" style="zoom:50%;" />
+
+<p>​		左半边判断完之后，接着判断右半部分，如果对于右半部分存在相交情况，则对于右半部分的所有子空间，递归的执行这个步骤即可：</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131444748.png" alt="image-20230513144410699" style="zoom: 50%;" /></th>
+<th><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131412368.png" alt="image-20230513141258321" style="zoom:50%;" /></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131427636.png" alt="image-20230513142703588"></td>
+<td><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131427025.png" alt="image-20230513142754978"></td>
+</tr>
+</tbody></table>
+<p>​		利用KD-Tree的结构来对空间划分AABB包围盒的好处是倘若光线与哪一部分空间不相交，那么则可以省略该部分空间所有子空间的判断过程，提升了效率。缺点是判断包围盒与三角面的是否相交较难，因此划分的过程不是那么想象的简单，其次同一个三角形面或物体可能被不同的包围盒同时占有，不同包围盒内的叶节点会同时存储这一个三角形面或物体。</p>
+<h4 id="BVH物体划分"><a href="#BVH物体划分" class="headerlink" title="BVH物体划分"></a>BVH物体划分</h4><p>​		BVH与前几种方法最显著的区别就是，不再以空间作为划分依据，而是从物体对象的角度考虑，即三角形面（物体）。作业中的实现方法如下：</p>
+<p>​		第一步同样找出场景的整体包围盒作为根节点。该包围盒需要包围住所有物体对象的包围盒（每个物体对象自己也有包围盒）:</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131453263.png" alt="image-20230513145329220" style="zoom:50%;" />
+
+<p>​		第二步找到合适的划分点，将最大包围盒内的三角形面分为两部分，再分别重新就算新的包围盒。关于找到合适的划分点：划分顺序可以按照xyz轴。不过为了划分均匀，也可以每次划分一般选择包围盒最长的那一轴划分，假设是x轴，n个物体对象从左到右，找到中位数的物体对象进行左右划分（对于x轴，将物体对象包围盒中心坐标按照x排序，找到中间的物体对象），如此便能保证划分的左右两边物体对象数量尽可能差不多。（也可以直接将轴分成左右两部分，坐标小于轴中点将其划分到左边）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131454548.png" alt="image-20230513145402505" style="zoom:50%;" />
+
+<p>​		注意到这里，包围盒会重叠，但一个物体对象只会被存储在唯一的包围盒内，而这也就解决了KD-Tree的缺点。接下来与KD-Tree的建立类似，递归的对所有子空间重复该步骤（如何划分使得重叠部分更少很有讲究），当叶子节点物体对象个数足够少停止（一般≤5）。</p>
+<p>​		如果不是叶子节点，需要记录指向左右子节点的指针以及自己的包围盒。如果只剩下一个物体对象，则生成叶子节点，叶子节点需要除了上述信息还需要记录物体对象信息（以叶子节点中一个物体对象为例）。如果只剩下两个物体对象，为当前节点生成两个叶子节点即可。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131454256.png" alt="image-20230513145433211" style="zoom:50%;" />
+
+<p>​		之后判断光线与包围盒求交的步骤同KD-Tree。BVH不需要判断包围盒和物体对象的关系。判断过程如下：</p>
+<p>1、当前节点所代表的大的包围盒与光线无交点：则不用计算左右子树。返回空交点。</p>
+<p>2、当前节点所代表的大的包围盒与光线有交点：如果为叶子节点，计算包围盒内部的物体对象与光线的相交情况；如果还有左右子树，则递归处理左右子树。</p>
+<p>计算包围盒内部的物体对象与光线的相交情况:</p>
+<p>例如，当一个物体非常复杂，比如进行模型加载。在加载模型时，需要将网格模型变成多个三角形对象。将这些三角形作为物体对象，构建新的bvh树。计算包围盒内部的物体对象与光线的相交情况前，先计算光线和物体的bvh树，如果到达叶子节点，就是光线和三角形求交。</p>
+<p>最后得到的应该是与该光线相交的最近的交点及物体信息。</p>
+<h5 id="使用SAH进一步加速BVH"><a href="#使用SAH进一步加速BVH" class="headerlink" title="使用SAH进一步加速BVH"></a>使用SAH进一步加速BVH</h5><p>当物体&#x2F;三角形分布不均匀的时候，上面将轴分成两半&#x2F;将物体个数分成左右两半得到的划分结果会变得很差。例如在左边有大量物体，右侧只有一个。如下左侧是按照原始方法划分的结果。由于划分时要尽可能减少划分后两部分包围盒重叠的体积，因为重叠的体积越大，光线穿过重叠区域的可能性越大，遍历两个子树的可能性就越高，计算消耗越多。所以原始划分方法是在物体跨度最大的轴上进行划分。结合物体分布不均匀以及尽可以减少重叠面积两个问题，新方法采用基于表面积的启发式评估划分方法。如右侧。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121932438.png" alt="image-20230712193236384" style="zoom:67%;" />
+
+<p>该方法通过对求交代价和遍历代价进行评估，给出了每一种划分的代价，而目的是去寻找代价最小的划分。假设当前节点的包围体中存在 n 个物体，设对每一个物体求交的代价为 t(i) ，如果不做划分依次对其求交则总的代价为：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121932798.png" alt="image-20230712193222770" style="zoom:67%;" />
+
+<p>如果这些物体划分为2组，这两组物体分别处于它们的包围盒A和B中。设光线击中它们的概率分别为 p(A) 和 p(B) 。p(A)的概率等于A包围盒大小&#x2F;包含AB的大包围盒大小；p(B)的概率等于B包围盒大小&#x2F;包含AB的大包围盒大小。AB并不一定会填满其父节点的包围体，并且AB可能存在重叠，因此 p(A) 和 p(B) 的和不一定为1，且它们的和越大说明 A 和 B 的重叠程度越大。综上所述，当前节点求交的代价可以写为</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121934320.png" alt="image-20230712193448279" style="zoom:67%;" />
+
+<p>其中 ttrav 表示遍历树状结构的代价。一般来说，假设对所有图元的求交代价是相同的，可设 t(i)&#x3D;1 ，又遍历的代价小于求交的代价，可设 ttrav&#x3D;0.125 。设包围盒A中图元的个数为 a ，B中图元的个数为 b ，则：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121935558.png" alt="image-20230712193513520" style="zoom:80%;" />
+
+<p>光线击中包围盒的概率可以根据包围体的表面积来估计，即在父节点的包围体C中，A和B的表面积越大它们被击中的概率也就越大，设 A ， B 和 C 的表面积为 S(A) ， S(B) 和 S(C) ，则有：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307121935924.png" alt="image-20230712193532895" style="zoom:67%;" />
+
+<h4 id="辐射度量学Radiometry"><a href="#辐射度量学Radiometry" class="headerlink" title="辐射度量学Radiometry"></a>辐射度量学Radiometry</h4><p>​		在Blinn-Phong模型中，光的能量用常数I表示，没有单位和一个准确的定义。该模型在计算高光的时候，只考虑是否能看见高光，不考虑实际接收到的能量，即光线方向和法线的关系。whited-style的光线追踪模型中，认为所有反射都是完美镜面反射，对于漫反射的光线没有进行追踪，直接用当前点的颜色。并且光在多次折射和反射中会有能量损失，能量损失的值是自定义的。</p>
+<p>（1）Radiant Energy:光源辐射出能量Q[J]</p>
+<p>（2）Radiant flux:单位时间内光源辐射出的能量（时间越长能量越多，在辐射度量学中考虑单位时间的性质）光源包含的各种波长（对应一种颜色）的能量。	即如下函数的总面积。计算机图形使用RGB作为辐射通量表示的简化。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131520260.png" alt="image-20230513152037223" style="zoom: 67%;" />
+
+<p>（3）Radiant intensity：单位时间光源在单位立体角（某个方向）上辐射出的能量</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131526426.png" alt="image-20230513152636391" style="zoom: 67%;" />
+
+<p>​		弧度制，数学术语，指用弧长与半径之比度量对应圆心角角度的方式。用符号rad表示，读作弧度。等于半径长的圆弧所对的圆心角叫做1弧度的角。由于圆弧长短与圆半径之比，不因为圆的大小而改变，所以弧度数也是一个与圆的半径无关的量。（圆周长2 πR，面积 πR^2）整个圆的弧度为2 π。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131529358.png" alt="image-20230513152911322" style="zoom:67%;" />
+
+<p>​		对应在三维上的球的弧度(立体角)的计算方式如下，立体角度所对应球上的投影面积比上半径的平方，整个球的立体角为4 π 。（球表面积 4πR^2）（投射到单位求上截面的面积。可以当作一个带有体积的方向。）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131529984.png" alt="image-20230513152919949" style="zoom:67%;" />
+
+<p>​		利用微分立体角dw定义一个方向（就好比用一个浮点数定义一个时间），计算如下：通过θ,ϕ确定空间中一个方向，在这两个角度上分别增加一个微分值，其中rdθ 是微分面积元的高，rsinθdϕ 是微分面积元的宽，二者相乘是微分立体角在球面上的面积。用该微分面积除以半径的平方即为微分立体角的值。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131534431.png" alt="image-20230513153447386" style="zoom: 67%;" />
+
+<p>​		对dw在整个球上积分，积分结果为4π。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202305131536006.png" alt="image-20230513153620960" style="zoom: 67%;" />
+
+<img src="C:\Users\华为\AppData\Roaming\Typora\typora-user-images\image-20230513153752040.png" alt="image-20230513153752040" style="zoom:67%;" />
+
+<p>​		对各向同性点光源，所有方向上的亮度都与方向无关，所以I是一个常数，因此对Φ积分时只用对立体角积分。最后推算出的I是一个常数。</p>
+ 
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        Donate
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/05/14/games101-14-Ray-Tracing2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/05/15/games101-15-Ray-Tracing3/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            games101-15-Ray-Tracing3
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/05/13/games101-13-Ray-Tracing1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">games101-13-Ray_Tracing1</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+        <li>
+          <a href="http://www.beian.miit.gov.cn/" target="_black">赣ICP备2021001676号</a>
+        </li>
+        
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friend">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/journal">日志</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1441758494&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

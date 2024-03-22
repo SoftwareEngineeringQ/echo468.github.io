@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    games202-6 |  Hexo
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-games202-6"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  games202-6
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/07/21/games202-6/" class="article-date">
+  <time datetime="2023-07-21T11:01:49.000Z" itemprop="datePublished">2023-07-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games202/">games202</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">9 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="环境光照下的阴影"><a href="#环境光照下的阴影" class="headerlink" title="环境光照下的阴影"></a>环境光照下的阴影</h4><p>即在渲染方程中考虑visibility，无法进行</p>
+<p>1、环境光照相当于记录了每个方向的光照，可以认为每个方向上都有光源。此时着色可以看成多光源绘制，绘制阴影需要给每一个方向的光源生成shadow map，数量极其庞大。</p>
+<p>2、visibility 项不能进行预处理然后采样，因为每个点的可见度都是不同的，其复杂度任意，难以通过预处理计算积分。且该项不好从渲染方程中拆出来。</p>
+<p>目前，工业界的一般方案是选取环境中最亮的那个光源（例如太阳）或前几个光源生成阴影图，然后由此生成阴影。</p>
+<h4 id="傅里叶级数展开"><a href="#傅里叶级数展开" class="headerlink" title="傅里叶级数展开"></a>傅里叶级数展开</h4><p>对于任何函数，都可以通过常数项和增加更多的sin和cos项逼近。也就是sin和cos的线性组合，且这些sin和cos函数频率都不同（从低频到高频，这些sin cos函数叫基函数）。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212034583.png" alt="image-20230721203450497" style="zoom: 50%;" />
+
+<p>图像作为二维数据，可以将其频域显示出来即频谱（傅里叶变换）。频谱中心最低频，外部最高频。通过滤波留下图中低频的部分，再恢复成原图，可以发现图片变模糊了。同时，时域的卷积（模糊操作）&#x3D;频域的乘积。</p>
+<p>两个函数相乘并积分（如x函数和y函数相乘对x积分，不然积分出来的是一个值而不是一个函数）&#x3D;卷积&#x2F;滤波操作&#x3D;频域上这两个函数对应的频谱相乘。这两个频谱只要有一个是低频，那么频域上乘积的结果就是低频的，即两个函数相乘并积分的结果是低频的，结果变化小平滑。结果的频率由这两个函数更低的频率决定。</p>
+<p>一个函数可以表示成多个基函数的线性组合。使用不同的基函数（一系列函数组合）可以表示不同的函数。除了sin cos还有常用的基函数：1+x+x^2+x^3…</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212052229.png" alt="image-20230721205214199" style="zoom:67%;" />
+
+<h4 id="Spherical-Harmonics"><a href="#Spherical-Harmonics" class="headerlink" title="Spherical Harmonics"></a>Spherical Harmonics</h4><p>一系列二维基函数，并且每一个函数都定义在球面上（可以理解为对方向的一个函数，三维空间中球面上的方向可以用两个变量表示。单位球上的一个点即为一个方向）。</p>
+<p>SH是一系列二维函数，这些函数有不同的频率（每一行一个频率）。每一个频率有几种不同的函数（一行每一列）。l&#x3D;0，第0阶的SH；l&#x3D;1，第1阶的SH。每一阶的SH有2l+1个SH基函数，这些基函数编号从-l~l。 前n阶n^2个函数。（这些二维函数不进行二维傅里叶变换，把球展开成二维的图。因为经过很多操作后恢复到球面上球面上会出现缝，很适合直接用SH分析球面上的性质）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212107650.png" alt="image-20230721210710588" style="zoom:67%;" />
+
+<p>现在给一个二维球面函数，要展开成SH的线性组合，前面的系数该为多少，这个求解的过程叫做投影。展开的任何一个基函数前面的系数如下（蒙特卡洛采样或者预计算）。关于为什么称为投影： 对于空间中一个向量，可以用（x,y,z）表示，xyz是该向量在三个轴上的投影&#x2F;系数。xyz轴是基函数。求投影的方法是用向量点乘xyz轴（基函数）。函数相乘再积分也是点乘。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212142430.png" alt="image-20230721214251335"></p>
+<p>可以看到l可以无限多。如果对于一个函数，只希望用前4阶进行表示，那么该函数保留的最高频率是l&#x3D;3的频率，丢弃了更高阶的频率。一般选取前几阶，所有基函数都使用，而不会在每一阶挑个别几个。</p>
+<p><strong>结论：环境光贴图提供了渲染方程中的L项。由于环境贴图已知，所以L项是一项已知的二维球面函数。可以用SH基函数表示，系数是用原函数和某一个基函数积分。</strong></p>
+<p>对于漫反射环境光着色（不考虑阴影）：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212228309.png" alt="image-20230721222819046" style="zoom:67%;" />
+
+<p>L项是环境光球面函数。BRDF是定义在半球上非常光滑的函数。这两个函数驻点相乘并积分。L可以任意频率，BRDF（包含cos）相当于一个低通滤波器，只是用三阶SH就可以很好的恢复。可以看到当函数投影到l&#x3D;3及之后系数基本为0，再次说明BRDF是低频函数。也就是不管环境光多复杂，与漫反射物体作用后看不到高频信息。因此L没有必要使用高频描述。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212234120.png" alt="image-20230721223414984" style="zoom:67%;" />
+
+<p>如下用0、1、2阶函数表示环境光照照到漫反射物体的结果，可以看到光照用3阶表示（同BRDF）就可以与实际计算得到一样的结果。也就是光照没必要保留太多高频信息。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212240618.png" alt="image-20230721224036531" style="zoom:67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212241959.png" alt="image-20230721224128875" style="zoom:67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212242511.png" alt="image-20230721224213422" style="zoom:67%;" />
+
+<p><strong>结论：当待计算的物体是类似漫反射物体，则BRDF平滑，基本可以用少阶SH表示，则L也可以用少阶的SH表示，丢弃高频信息。</strong></p>
+<h4 id="PRT"><a href="#PRT" class="headerlink" title="PRT"></a>PRT</h4><h5 id="漫反射"><a href="#漫反射" class="headerlink" title="漫反射"></a>漫反射</h5><p>对于一个着色点、环境光可以描述成入射光i的球面函数，visibility项可以描述成入射光i球面函数，对于brdf已知出射光o，入射光i为2维，也可以表示成球面函数。解积分值最直接的方法是将每个对应像素相乘再相加。假如一个纹理是64×64×6的大小，每一个着色点需要计算64×64×6次。并且每个点的visibility*max纹理不同，BRDF纹理也可能不同（本质还是多次采样 ）。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307212311019.png" alt="image-20230721231102958" style="zoom:67%;" />
+
+<h5 id="采用预计算和SH简化计算："><a href="#采用预计算和SH简化计算：" class="headerlink" title="采用预计算和SH简化计算："></a>采用预计算和SH简化计算：</h5><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/image-20230723211340675.png" style="zoom:67%;" />
+
+<p>首先将渲染方程看成两部分，V和BRDF与L拆分成两部分。L可以用基函数表示，Vmax和B对于一个着色点不变，可以认为是一个着色点的性质。也就是在渲染之前可以先计算好VB。在确定了o和n之后，VB以及cos项总体是一个球面函数，可以用基函数表示。（也就是场景物体不能变，只要光源被预计算，光源是可以切换的；光源旋转后会有不同的预计算结果，但是SH会立刻得到旋转后的光源系数如何改变）</p>
+<p>则在diffuse场景（考虑阴影）：在漫反射场景下，BRDF是一个常数，可以取到积分外。将L变成基函数的表示形式系数为l（求系数的积分是在球面积分），交换求和和积分函数（此处可交换）。将系数l移到积分外。Vmax(0,n·i)是和L无关的项，简称light-transport。light-transport和基函数积分即light-transport球面函数投影到基函数的系数，该系数可以预计算（求系数的积分是在球面积分，所以渲染方程的积分域应该改成球面，因为下半球都为0所以不影响积分结果）。也就是说将light-transport这个二维球面函数用和L一样的基函数表示，计算系数是多少。则对于任何一个着色点的值，假设要用m个基函数，将L的m个系数和light-transport的m个系数对应相乘再相加，并将结果乘以常数BRDF。</p>
+<p>（对于确定的着色点，可以将light-transport投影到任何基函数；场景中只有L改变，也就是li）</p>
+<h5 id="SH："><a href="#SH：" class="headerlink" title="SH："></a>SH：</h5><p>正交性：基函数投影到其他基函数结果为0</p>
+<p>投影好计算</p>
+<p>支持旋转，旋转原球面函数只需旋转基函数，线性组合不变。旋转后得到的函数不再是SH基函数，但可以由同阶的基函数的线性组合得到。也就是旋转某一个基函数，实际上是改同阶基函数的系数。所以可以打表记录旋转角度以及对应的组合。</p>
+<p>使用阶数越多，越能逼近原始环境光（BFDR也要高阶）。</p>
+<h4 id="具体实现："><a href="#具体实现：" class="headerlink" title="具体实现："></a>具体实现：</h4><p>在path tracing的基础上，在L已知的情况下，使用SH和预处理而不是采样的方法计算着色点的渲染方程，减少因大量采样耗费的时间。</p>
+<h5 id="一、只考虑来自环境光的直接光照"><a href="#一、只考虑来自环境光的直接光照" class="headerlink" title="一、只考虑来自环境光的直接光照"></a>一、只考虑来自环境光的直接光照</h5><p>不考虑光的多次弹射和间接光照，可以在光栅化（因为片段着色器不知道坐标系下场景的坐标情况因此无法计算弹射和间接光照）的基础上使用渲染方程。对于积分和渲染方程，需要知道L即光源位置（不考虑递归L）。对于多个点光源，可以将点光源方向的L相加；对于面光源可以采样；此处环境光下L已知。</p>
+<p>此处积分是在整个球而不是半球积分。对于下半球，max&#x3D;0，所以不影响计算。</p>
+<p>1、计算环境光的SH系数（使用3阶SH，对于每个顶点环境光函数是相同的，因为有RGB三个通道，系数为vec3）。每个像素代表一个方向，对于单个SH计算系数：</p>
+<p>L：图片像素对应的RGB	SH值：由像素得到方向，通过归一化后的方向向量得到某一阶下某个SH的在该方向的值。	dw：通过像素大小计算在单位球上的投影面积	∫：对每个像素执行上述操作。</p>
+<p>2、计算light-transport的SH系数（使用3阶SH，对于每个顶点light-transport函数是不同的，因此每个顶点都要计算一个SH系数作为顶点属性，系数为float）。对于一个顶点的单个SH计算系数：f(x)：（1）考虑阴影：visibility× max(N·wi,0)（2）不考虑阴影：max(N·wi,0)采样一个方向，通过顶点法线和生成光线向量判断是否有遮挡物计算f(x)的值（不能光栅化）。	SH值：通过采样得到的方向向量得到某一阶下某个SH的在该方向的值。	∫：多次采样得到多个方向向量重复上述操作。</p>
+<p>3、计算着色：将顶点着色器计算每个顶点的颜色值再插值到片元。因为在预计算时只知道顶点的属性(坐标法线),因此只预计算了每个顶点的light-transport的SH系数作为顶点属性，所以在顶点着色器计算顶点的着色再插值到每一个片段&#x2F;或者将light-transport的SH系数传入片段着色器，经过插值后计算片段着色（L对于每个片段相同）。</p>
+<h5 id="二、考虑间接光照（即光线多次弹射）"><a href="#二、考虑间接光照（即光线多次弹射）" class="headerlink" title="二、考虑间接光照（即光线多次弹射）"></a>二、考虑间接光照（即光线多次弹射）</h5><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307261837739.png" alt="image-20230726183745871" style="zoom: 50%;" />
+
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307261838205.png" alt="image-20230726183842491"></p>
+<h5 id="三、SH旋转"><a href="#三、SH旋转" class="headerlink" title="三、SH旋转"></a>三、SH旋转</h5><p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307261838204.png" alt="image-20230726183852172"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        Donate
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/07/21/games202-6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/07/24/games202-7/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            games202-7
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/07/17/games202-5/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">games202-5</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+        <li>
+          <a href="http://www.beian.miit.gov.cn/" target="_black">赣ICP备2021001676号</a>
+        </li>
+        
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friend">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/journal">日志</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1441758494&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

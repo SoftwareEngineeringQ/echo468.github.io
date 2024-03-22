@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    games202-4 |  Hexo
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      <canvas class="fireworks"></canvas>
+      <style>
+        .fireworks {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 99999;
+          pointer-events: none;
+        }
+      </style>
+      
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-games202-4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  games202-4
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/07/13/games202-4/" class="article-date">
+  <time datetime="2023-07-13T15:45:41.000Z" itemprop="datePublished">2023-07-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/games202/">games202</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="深度了解PCF"><a href="#深度了解PCF" class="headerlink" title="深度了解PCF"></a>深度了解PCF</h4><p>​		pcf除了将当前像素深度和对应采样点p进行比较外，还会与对应采样点周围多个采样点如q进行比较。pcf计算阴影的过程如第一个和第二个公式，f是比较函数即x+（当[]内的结果小于0，则该函数为0；当[]内的结果大于等于0，则该函数为1-&gt;即深度测试的过程），w(p,q)是权重，可以根据p和q的距离定义。在范围N中取所有可能的p，将结果相加作为最终结果得到visibility。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307140026388.png" alt="image-20230714002636212" style="zoom: 67%;" />
+
+<p>​		因此从第二个公式看出，pcf不是将shadow map进行过滤平均，再将当前像素深度和对应采样点p进行个比较，这样比较的结果还是非0即1。从第三个公式看出，pcf也不是将最后得到的锯齿visibility进行过滤模糊。（p,q应该改为x,y）</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307140029541.png" alt="image-20230714002921411" style="zoom:67%;" />
+
+<p>​		根据pcss的三个过程，在第一个求block的平均深度和进行pcf的过程是最耗时的。因为需要遍历filter内的每一个像素，也可以选择不遍历而是通过随机采样的方式得到近似的结果，但这样会引入噪声。采样方式可以选择泊松圆盘采样等，采样需要知道采样范围即filter大小和采样数。用纹理坐标产生随机种子，可以保证每次采样结果不同。将采样结果对纹理坐标进行偏移。工业界通常的处理方式是先对shadow map稀疏采样，再在图像空间内对含噪声结果进行一步降噪，就可以获得比较好的结果。连续的稀疏采样会造成闪烁，因为帧与帧之间随机采样相互独立，引入的噪声不一样，连续播放时会闪烁。</p>
+<h4 id="VSSM"><a href="#VSSM" class="headerlink" title="VSSM"></a>VSSM</h4><p>​		在考虑加权的情况下，将filter内的每一个像素与着色点进行深度比较并且将结果相加平均，想知道在该范围内，有百分之多少的深度比着色点浅。</p>
+<p>​		首先是PCSS的第三步，也就是PCF操作，VSSM假设在这一步对shadow map采样时得到深度值样本大致服从正态分布，想要定义出这样一个正态分布，就需要事先求得样本的均值和方差。</p>
+<p>​		想要迅速得到一块区域内的平均值，可以使用mipmap。但是该方法不同层级间要做插值并且只适合正方形，因此误差较大，另一种方法是使用SAT.</p>
+<p>​		想要得到一块区域内的方差，可以使用如下公式,将期望（均值，即上一步得到的结果，因为范围内每个像素概率相同）转换成方差。如下方式除了记录深度，还需要记录深度的平方。可以将两个数据记录在r通道和g通道，从而避免使用两个纹理。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141614929.png" alt="image-20230714161400809"></p>
+<p>​		在得到了方差和均值后，即可得到filter范围内的正态分布分数pdf(z)。现在想知道深度取某一值z1时，有百分之多少的纹素深度比z1小，即左图灰色区域的面积。每一个值都会对应一个面积值，即右侧函数cdf(z)。然而获得积分值只能通过查表，使用c++的内置函数也非常麻烦。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141656004.png" alt="image-20230714165617822" style="zoom:67%;" />
+
+<h5 id="切比雪夫近似"><a href="#切比雪夫近似" class="headerlink" title="切比雪夫近似"></a>切比雪夫近似</h5><p>​	如下不等式可以作为约等式使用。即只需要知道方差和均值，即可得到x&gt;t的概率。不等式不需要假设样本服从正态分布，也适用其他单峰函数。但其局限性在于x需要大于均值。在正态分布的情况下较好解决，但实际使用时不考虑太多。</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141659766.png" alt="image-20230714165911683" style="zoom:67%;" />
+
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141700107.png" alt="image-20230714170019993"></p>
+<p>过程如下：在生成shadow map时在通道存入深度值和深度值的平方，通过mipmap或者sat生成深度和深度平方的均值。在确定着色点在像素上对应的点后，取一定filter，在mipmap上采样一定范围内的均值，并计算方差，从而计算概率，得到过滤平均后的visibility。采样和硬件生成mipmap开销较小。不过在物体变动或者光源移动必须更新mipmap，或者每一帧下。</p>
+<p>对于是PCSS的第一步，获得一定范围内，遮挡物的平均深度。例如在深度为7的着色点下，要求蓝色区域的均值zocc。（红色区域不是遮挡物，红色区域的平均深度时zuocc）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141839150.png" alt="image-20230714183939094"></p>
+<p>满足如下等式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141912732.png" alt="image-20230714191216697"></p>
+<p>N1&#x2F;N即P（x&gt;t)，可以通过切比雪夫公式计算。得到N1&#x2F;N即可得到N2&#x2F;N（1-P（x&gt;t））。此时不知道zunocc。此处假设所有&gt;t的深度值为t。因为一般阴影接收的地方是平面。（pcss更常用，因为更加能容忍噪声，有很多效果很好的降噪手段）</p>
+<h4 id="一块区域内的平均值"><a href="#一块区域内的平均值" class="headerlink" title="一块区域内的平均值"></a>一块区域内的平均值</h4><p>最简单的办法mipmap:快速、近似方形的范围查询。各向异性过滤</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141943176.png" alt="image-20230714194353020"></p>
+<p>小，可以</p>
+<p>准确方式SAT：</p>
+<p>利用前缀和思想，范围内求平均前先将范围内求和，如下是一维：</p>
+<img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141944050.png" alt="image-20230714194458942" style="zoom:67%;" />
+
+<p>二维情况（生成一个新矩形，大小与原图相同，每个元素都是从左上角加到该元素的值，只是累加可能会损失数值精度，可以得到任何范围大小内的综合）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307141950113.png" alt="image-20230714195036035"></p>
+<h4 id="Moment-shadow-mapping"><a href="#Moment-shadow-mapping" class="headerlink" title="Moment shadow mapping"></a>Moment shadow mapping</h4><p>vssm的问题在于</p>
+<p>不能假设竞态分布 简简单情况</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307142001912.png" alt="image-20230714200113782"></p>
+<p>pcf</p>
+<p>偏黑，阴影变白不行！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307142003776.png" alt="image-20230714200333681"></p>
+<p>镂空  接受物不是平面 超过均值才准</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307142005832.png" alt="image-20230714200510680"></p>
+<p>MSM是为了避免分布描述的不准。其方法是使用更高阶的矩去描述分布。关于矩最简单的就是一个数的几次方，例如记录到x的四次方，即保留x的四阶矩。VSSM记录了深度和深度的平方，即使用二阶矩。使用更高阶的矩可以使得分布更加准确（证明过程复杂）。如果保留前m阶的矩，可以表示越阶函数，有2&#x2F;m个台阶。例如使用z到z的四次方可以恢复出图中深绿的函数（一般使用4阶矩足够，但是恢复过程相当复杂）。得到的函数即cdf，可以发现与pcf得到的结果基本符合。（该方法增加存储量，但是工业界有方法可以存储，如一个32位float存储两个16位值，但不拆开无法插值，拆开后手动插值和计算机插值会有差别；对分布有更加精准的估计）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/echo468/picgo@main/img/202307142014391.png" alt="image-20230714201442307"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        Donate
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/07/13/games202-4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/07/17/games202-5/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            games202-5
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/07/10/games202-3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">games202-3</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+        <li>
+          <a href="http://www.beian.miit.gov.cn/" target="_black">赣ICP备2021001676号</a>
+        </li>
+        
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friend">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/journal">日志</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script>
+
+<script src="/js/clickBoom1.js"></script>
+
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1441758494&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>
